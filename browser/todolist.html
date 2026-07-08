@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="./layout/app.css">
+    <script src="./layout/app.js"></script>
+    <script src="../src/js/todolist/app.js" type="module" defer></script>
+</head>
+<style>
+    .hide-completed .is-completed,
+    .hide-todo .todo:not(.is-completed) {
+        display: none !important;
+    }
+</style>
+<body>
+
+    <section class="container pt-5" id="todolist"></section>
+
+    <!--
+        template a une propriété 'content' : Qui va nous donner le contenu du template et qui nous donne un nouvel élément qui est le document-fragment, se comporte comme un neoud classique, on peut même le cloner avec .cloneNode(true) et il va nous donner un document-fragment différent on peut même le rajouter au document.body.append(id-template.content.cloneNode(true))
+        Un fragment n'existe pas en soit dans le HTML final donc on ne peut branché un évenement sur le fragment
+    -->
+    <template id="todolist-layout">
+        <form action="" class="d-flex pb-4">
+            <input type="text" required="" name="title" class="form-control" placeholder="Acheter des patates...">
+            <button class="btn btn-primary">Ajouter</button>
+        </form>
+        <main>
+            <div class="btn-group mb-4 filter" role="group">
+                <button type="button" class="btn btn-outline-primary active" data-filter="all">Toutes</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="todo">A faire</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="done">Faites</button>
+            </div>
+
+            <ul class="list-group">
+            </ul>
+        </main>
+    </template>
+
+    <template id="todolist-item"></template>
+
+</body>
+</html>

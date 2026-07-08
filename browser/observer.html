@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersection observer</title>
+    <script src="../src/js/observer.js" defer></script>
+</head>
+<style>
+    .resize {
+        max-width: 1000px;
+        margin-inline: auto;
+    }
+
+    .resize div {
+        border: 1px solid #CCC;
+        padding: 20px;
+        background-color: aliceblue;
+        text-align: center;
+    }
+</style>
+<body>
+
+    <div class="resize">
+        <div id="element"></div>
+    </div>
+
+    <div style="height: 1000px;"></div>
+    <button class="btn-1">Premier</button>
+    <div style="height: 300px;"></div>
+    <button class="btn-2">Deuxième</button>
+    <div style="height: 300px;"></div>
+
+</body>
+</html>

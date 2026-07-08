@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastify</title>
+    <link rel="stylesheet" href="/app.css"> <!-- On importe le css dépuis la racine -->
+    <script src="/app.js" defer></script>
+</head>
+<body>
+
+    <% if(locals.user) { %>
+        <form action="/logout" method="post">
+            <button class="btn btn-danger">Se déconnecter</button>
+        </form>
+    <% } %>

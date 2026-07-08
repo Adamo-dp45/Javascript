@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesse</title>
+</head>
+<body>
+
+    <script>
+        // Lorsqu'on créer une Promise le code à l'intérieur est immédiatement exécuter, ce n'est pas lors du then, c'est lui qui est async
+        // Permet de résoudre les problème avec async qui est de mettre des callback dans des callback ..
+        const p = new Promise((resolve, reject) => {
+            resolve(5) // A été résolue avec la valeur 5
+        })
+
+        p.then((n) => {
+            console.log('Le nombre', n) // Ici n sera 5
+            return 5 // Quand la promesse est résolue retourne la valeur 5 et on pourra utiliser un autre .then() ce qui résoud le problème du async
+        })
+        .then((n) => {
+            console.log('Le nombre 2', n)
+        })
+        .catch((e) => {
+            console.log('Rejete', e)
+        })
+        .finally(() => {
+            console.log('je suis finally')
+            // C'est quelque chose qui va être executer quoi qu'il arrive
+        })
+
+        function wait(duration) { // Ici est async car il retourne une promise
+            return new Promise ((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(duration)
+                }, duration)
+            })
+        }
+
+        function waitAndFail(duration) {
+            return new Promise ((resolve, reject) => {
+                setTimeout(() => {
+                    reject(duration)
+                }, duration)
+            })
+        }
+
+        wait(2000)
+            .then(() => {
+                console.log('Attente 2s')
+                return wait(1000)
+            })
+            .then(() => {
+                console.log('Attente 1s')
+                return waitAndFail(2000)
+            })
+            .catch(() => {
+                console.log('Erreur perso')
+            })
+
+        wait(2000)
+            .then(() => {
+                console.log('Promesse qui echoue')
+                return waitAndFail(1000)
+            }).catch(() => {null})
+
+
+        // Pour rendre une fonction asyncrone, await n'est utiliser que dans une fonction async
+        async function main() { // Cette fonction renvoie une promesse
+            try {
+                await wait(1000)
+                console.log('Attendre 3s')
+                await wait(3000)
+                console.log('Attendre 1s')
+                await waitAndFail(4000)
+                console.log('Erreur perso')
+            } catch(e) {
+                console.log('Error')
+            }
+        }
+
+        async function pro() {
+            const duration = await wait(5000)
+            console.log('Duration:' + duration)
+            return 5
+        }
+
+        main() 
+        pro() // Puis ce qu'il renvoie une prommesse on peut
+            .then(() => {
+                console.log('Bonne attente')
+            })
+
+        Promise.all([wait(1000), wait(2000), waitAndFail(3000)]) // Resoud tous les problèmes, si une échoue la promesee à échoué directement avec le résultat de la première promesse qui échoue
+            .then(console.log)
+            .catch(console.log)
+
+        // Aussi Promise.allSettled, nous renvoie en mode objet et ignore les promesse qui echouent
+
+        Promise.any([wait(8000), wait(9000)]) // Nous donne le resultat de la première promesse qui est resolue, aussi la première qui est resolue après un echec
+            .then(console.log)
+            .catch(console.log)
+
+        Promise.race([wait(8000), wait(9000)]) // Si la première promesse échoue, il va considérer que c'est un échec
+            .then(console.log)
+            .catch(console.log)
+
+        // N'utiliser le async que si on a un await à l'intérieur, pour la performance
+        function waitSync(duration, msg) {
+            return wait(duration).then(() => {console.log(msg)})
+        }
+        waitSync(5000, 'Adama')
+    </script>
+
+</body>
+</html>

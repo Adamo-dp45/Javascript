@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onglets accessibles</title>
+    <link rel="stylesheet" href="./tabs.css">
+    <script src="./tabs.js" type="module" defer></script>
+</head>
+<body>
+
+    <div style="height: 800px;"></div>
+
+    <nav-tabs class="nav-pills">
+        <a href="#tab1" aria-selected="true">Tab 1</a>
+        <a href="#tab2">Tab 2</a>
+        <a href="#tab3">Tab 3</a>
+        <a href="#tab4">Tab 4</a>
+    </nav-tabs>
+
+    <div style="position: relative;"> <!-- Pour l'animation -->
+        <div id="tab1">
+            <p>Lorem ipsum dolor sit, <a href="">Grr</a> amet consectetur adipisicing elit. Architecto error voluptatibus quam cupiditate earum cum totam laborum blanditiis ullam est? Ullam hic iusto aspernatur dolorem. Quis quibusdam nostrum reiciendis dolorum.</p>
+            <p>Ipsa temporibus ut placeat iusto esse? Similique voluptatum vitae, recusandae quod dolorum, reprehenderit eum consequatur ipsam ullam nihil possimus dolorem alias vero error saepe sint mollitia voluptate. Aspernatur, laboriosam dolores?</p>
+        </div>
+        <div id="tab2" hidden="hidden">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, odio esse ex quia harum molestiae illum fugiat accusamus, reiciendis praesentium impedit doloremque? Nihil consequatur ea doloribus alias neque ipsum inventore.</p>
+            <p>Quod dolorem sunt assumenda illo unde laudantium culpa. Corporis, sint voluptate! Perferendis qui tempore unde dolorum, alias maxime magnam quidem id voluptatem doloribus suscipit iste in facilis laboriosam commodi veritatis?</p>
+        </div>
+        <div id="tab3" hidden="hidden">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus temporibus illum blanditiis officiis vitae possimus delectus eveniet magnam, a, optio recusandae et in dolore consequatur? Dolorum doloremque labore ex voluptatum!</p>
+            <p>Nisi iste tempore quasi ab libero nulla distinctio velit, provident sapiente necessitatibus numquam quibusdam impedit ipsa et a sint qui id? Dolorum odit commodi ipsum ullam dolor ea nemo reiciendis.</p>
+        </div>
+        <div id="tab4" hidden="hidden">
+            <p>Ajouté ipsum dolor sit amet consectetur adipisicing elit. Accusamus temporibus illum blanditiis officiis vitae possimus delectus eveniet magnam, a, optio recusandae et in dolore consequatur? Dolorum doloremque labore ex voluptatum!</p>
+            <p>Nisi iste tempore quasi ab libero nulla distinctio velit, provident sapiente necessitatibus numquam quibusdam impedit ipsa et a sint qui id? Dolorum odit commodi ipsum ullam dolor ea nemo reiciendis.</p>
+        </div>
+    </div>
+
+    <div style="height: 1200px;"></div>
+
+</body>
+</html>

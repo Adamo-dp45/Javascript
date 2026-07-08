@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecouteur d'évènement</title>
+    <script src="../src/js/listener.js" defer></script>
+</head>
+<style>
+    .spoiler {
+        background-color: black;
+        color: black;
+        cursor: pointer;
+    }
+
+    .spoiler::selection {
+        color: rgba(0, 0, 0, 0);
+    }
+
+    span {
+        transition: .3s;
+    }
+</style>
+<body>
+
+    <button><span>Bonjour</span></button>
+
+    <form action="">
+        <input type="text" name="nom">
+        <input type="checkbox" id="che">
+        <select name="" id="">
+            <option value="option 1">Option 1</option>
+            <option value="option 2">Option 2</option>
+            <option value="option 3">Option 3</option>
+        </select>
+        <button>Envoyer</button>
+    </form>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio at alias voluptatibus, aliquam obcaecati nemo ex! Laborum autem consequuntur, iste ullam dolor corrupti, doloremque possimus commodi, illo esse atque rerum.
+        <span class="spoiler">Deserunt perspiciatis mollitia voluptates, minima odio natus laborum</span>, magnam porro exercitationem hic doloremque qui dolorum suscipit eum vel distinctio! Iure recusandae veritatis id autem eligendi ut fugiat maiores laudantium! Ipsam.
+        Sed odit perspiciatis odio, dolores aut omnis laudantium laboriosam deserunt totam ut? Tenetur, <span class="spoiler">impedit amet non nulla consequuntur natus nesciunt perspiciatis tempore libero ratione itaque quia</span> exercitationem officia asperiores quo.
+    </p>
+
+    <video src=""></video>
+    <img src="../src/images/Partage reseaux - 2025-08-09 011549.png" width="100" height="100" alt="">
+    <div class="div" data-user="John" style="height: 100px; background-color:gray"></div>
+
+</body>
+</html>

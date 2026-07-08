@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="./build/jquery.js" defer></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    #droppable {
+        width: 200px;
+        height: 100px;
+        border: 2px dashed #999;
+        line-height: 100px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #draggable {
+        width: 100px;
+        height: 50px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    #slider {
+        margin-top: 20px;
+    }
+
+    #progressbar {
+        margin-top: 20px;
+    }
+</style>
+<body>
+
+    <!-- Plugins
+
+        - Plugins d'animation et effets
+            - Animate.css : Ajoute des animations Css via JQuery
+            - WOW.js : Déclenche des animations au défilement
+            - Parallax.js : Crée des effets de défilement parallaxe sur des éléments
+            - Typed.js : Ajoute des animations de texte comme saisie automatique
+            - ScrollReveal.js : Montre des éléments au fur et à mesure du défilement
+
+        - Plugins d'interface utilisateur
+            - JQuery UI : Ensemble de widgets et interactions glisser-déposer, accordéons, calendriers, boîte de dialogue ..
+            - Slick : Carrousel d'images
+            - Owl Carousel : && avec des options avancées
+            - Magnific Popup : Léger pour afficher des modaux ou lightboxes
+            - SweetAlert : Afficher des boîtes de dialogue modernes
+            - Toastr : Affiche des notifications utilisateur
+
+        - Plugins pour les tableaux de données
+            - DataTable : Gestion avancée des tableaux
+            - jqGrid : Pour créer des grilles de données dynamiques
+            - Tablesorter : Simplifier le tri de tableaux HTML
+            - EditableGrid : Rendre les cellules d’un tableau modifiables directement
+
+        - Plugins pour les graphiques
+            - Flot : Pour les graphiques interactifs
+            - Morris.js : Crée des graphiques simples et beaux
+            - Highcharts : Puissante pour des graphiques interactifs
+
+        - Plugins pour la gestion d'images et de médias
+            - Lightbox2 : Affiche des images dans une vue modale
+            - Fancybox : Pour afficher des galeries et des médias
+            - Cropper.js : Ajoute des fonctionnalités de recadrage d'images
+            - Plyr : Lecteur multimédia moderne
+
+        - Plugins pour les effets de défilement
+            - FullPage.js : Crée des sections pleine page avec des transitions fluides
+            - ScrollMagic : Contrôle le défilement avec des animations
+            - Infinite Scroll : Charge du contenu supplémentaire lors du défilement
+            - One Page Scroll : Crée une navigation par sections sur une seule page
+
+        - Plugins pour la gestion des fichiers
+            - Dropzone.js : Permet d'ajouter des zones de dépôt pour le téléchargement de fichiers
+            - Filepond : Pour le téléchargement et la gestion de fichiers
+            - jQuery File Upload : Pour le téléchargement de fichiers avec support Ajax
+
+        - Plugins pour les calendriers et horaires
+            - FullCalendar : Affiche des calendriers interactifs avec gestion des événements
+            - Datepicker jQuery UI : Sélecteur de dates simple
+            - Timepicker : Ajoute un sélecteur d'heure
+            - Pikaday : Pour la sélection de dates
+
+        - Plugins pour le développement avancé
+            - jQuery Ajax Form : Simplifie les requêtes ajax avec des formulaires
+            - JQuery Form Plugin : Gère les soumissions de formulaires avec Ajax
+            - Handlebars.js : Permet de gérer les templates dynamiques
+            - Mustache.js : Système de templates minimaliste
+            - JQuery Validation : Validation de formulaires
+            - Tagify : Gestion des champs de tags dans les formulaires
+            - Chosen : Améliore les champs <select> avec des fonctionnalités avancées dont recherche, multisélection
+            - Select2 : Alternative à Chosen avec plus de fonctionnalités comme ajax, balisage personnalisé
+
+        - Plugins pour les notifications et alertes
+            - Noty : Crée des notifications flottantes
+            - PNotify : Crée des notifications stylées et riches en fonctionnalités
+            - Growl : Crée des notifications simples et élégantes
+
+        - Plugins divers
+            - Sticky.js : Rend des éléments 'collants' lors du défilement
+            - Waypoints : Détecte quand un élément entre ou quitte la vue
+            - Lottie : Ajoute des animations vectorielles json par after effects
+    -->
+
+    <div id="element">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus ipsa vero culpa nobis quibusdam reiciendis, adipisci debitis incidunt maiores nulla impedit id facere non eius. Possimus aspernatur corporis maxime.
+    </div>
+
+    <button class="btn">Bouton</button>
+    <input type="text">
+
+    <h1>JQuery Ui</h1>
+    <p>Datepicker</p>
+    <input type="text" id="datepicker" placeholder="Choisissez une date">
+
+    <p>Dialog Box</p>
+    <button id="open-dialog">Ouvrir la boîte de dialogue</button>
+    <div id="dialog" title="Message Important">
+        <p>Ceci est une boîte de dialogue ! Vous pouvez la fermer ou interagir avec elle</p>
+    </div>
+
+    <p>Slider</p>
+    <div id="slider"></div>
+    <p>Valeur sélectionnée : <span id="slider-value">50</span></p>
+
+    <p>Draggable - Droppable</p>
+    <div id="draggable">Faites-moi glisser</div>
+    <div id="droppable">Déposez ici</div>
+
+    <p>Progress Bar</p>
+    <div id="progressbar"></div>
+    <button id="start-progress">Démarrer la progression</button>
+
+    <h1>FullCalendar</h1>
+    <div id="calendar"></div>
+
+    <h1>Validation de formulaire avec jQuery Validation</h1>
+    <form id="form" class="w-50 mx-auto">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur *</label>
+            <input type="text" id="username" name="username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse e-mail *</label>
+            <input type="email" id="email" name="email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe *</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirmer le mot de passe *</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="terms" name="terms" class="form-check-input">
+            <label for="terms" class="form-check-label">J'accepte les termes et conditions *</label>
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "dist", // Le dossier de destination
+        "target": "ES2015", // Pour cibler des navigateurs plus récentes
+        "noEmitOnError": true, // Pour ne compiler pas si il y'a une erreur
+        "strict": true, // Pour activer plusieurs options et tous notre code doit être typé correctement
+        "declaration": true, // Pour les fichiers de déclarations
+        // "declarationDir" -- Le dossier de destination des fichiers de déclarations
+        "moduleResolution": "node", // Permet d'importer un module dans notre code ts
+        // "noUncheckedIndexedAccess": true -- Va empêcher d'acceder à une propriété sans qu'on est checké l'index
+        "experimentalDecorators": true // Pour activer les decorators
+    },
+    "files": [
+        "typescript/app.ts"
+    ],
+    "include": [ // Pour inclure des fichiers supplémentaires comme les fichiers de déclarations pour qu'il soit utiliser dans mon code, les fichiers de déclarations ne sont pas générer en sortie car il est là pour nous aider
+        "src/types/**/*"
+    ]
+}
+
+// npx tsc --watch

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sommaire dynamique</title>
+    <script src="../src/js/summary.js" defer></script>
+</head>
+<style>
+    body {
+        display: flex;
+        margin: 0;
+        font-family: sans-serif;
+    }
+
+    .summary {
+        width: 300px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-right: 1px solid #ccc;
+        height: 100vh;
+        overflow-y: auto;
+        position: sticky;
+        top: 0;
+    }
+
+    .summary ul {
+        list-style: none;
+        padding-left: 20px;
+    }
+
+    .summary a {
+        text-decoration: none;
+        color: #0077cc;
+    }
+
+    .summary a:hover {
+        text-decoration: underline;
+    }
+
+    main {
+        padding: 30px;
+        flex-grow: 1;
+    }
+
+    h1, h2, h3, h4 {
+        scroll-margin-top: 100px;
+    }
+</style>
+<body>
+
+    <nav class="summary">
+        <h2>Sommaire</h2>
+    </nav>
+
+    <main id="content">
+        <h1>Introduction</h1>
+        <p>Lorem ipsum...</p>
+
+        <h2>Objectifs</h2>
+        <p>Objectifs du projet...</p>
+
+        <h3>Public concerné</h3>
+        <p>Détails...</p>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h2>Méthodologie</h2>
+        <h3>Étape 1</h3>
+        <h4>Sous-étape A</h4>
+        <h4>Sous-étape B</h4>
+        <h3>Étape 2</h3>
+
+        <h1>Conclusion</h1>
+        <p>Fin de l'article...</p>
+    </main>
+
+</body>
+</html>

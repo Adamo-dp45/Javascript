@@ -1,0 +1,58 @@
+body {
+    font-family: sans-serif;
+    background-color: #0F1923;
+    color: #FFF;
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+/* ----- */
+.title {
+    opacity: 0; /* N'est pas visible au départ */
+    max-width: 320px; /* Si on veut définir une largeur */
+    font-weight: 300;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.title strong {
+    font-weight: bold;
+}
+
+.title span {
+    display: inline-block; /* Pour qu'il prenne en compte le 'overflow' */
+    overflow: hidden;
+    line-height: 0.8; /* Pour régler le problème de hauteur */
+}
+
+.title span span {
+    display: block; /* Pour éviter le décalage */
+    animation: titleReveal .7s both; /* 'both' garde les valeurs de fin d'animation */
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0; 
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* - Permet de mettre le texte en surimpression et de corriger la hauteur de ligne
+    .page-absolute {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: yellow;
+        opacity: .5;
+    }
+*/

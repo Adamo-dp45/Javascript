@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map et Set</title>
+</head>
+<body>
+
+    <ul></ul>
+
+    <script>
+        /*
+            Remarque : Les set vont être intérèssant dès lors que l'on veut sauvegarder des valeurs ou on se fiche de l'ordre et on veut que les valeurs ne soit sauvegarder qu'une seule fois, et on n'a las map qui fnctionne comme les object en javascript qui prend en params une clé et une valeur sauf que dans le cas des map les clés peuvent être des objets complexe
+        */
+
+        // Map
+        const map = new Map()
+        map.set("a", "OK")
+        map.set("b", "ssffs")
+        map.set("c", "sssgfsK")
+        map.set(new Date(), 'Jane') // On peut avoir comme clé un objet
+        map.delete("a") // Supprime
+        map.clear() // Nettoie complètement notre map
+        // map.size() -- Taille du map
+        map.keys() // L'ensemble des clés sous forme d'ittérateur
+        map.values() // L'ensemble des valeurs sous forme d'ittérateur
+        map.entries() // Ittérateur de tableau qui contient à la fois les clés et les valeurs
+
+        console.log(map.get('c'))
+
+        // On peut avoir un map dans un map
+        const customer = new Map()
+        const customer1 = new Map()
+        customer1.set('firstname', 'Adama')
+        customer1.set('lastname', 'Bak')
+        const customer2 = new Map()
+        customer2.set('firstname', 'Sita')
+        customer2.set('lastname', 'Fane')
+
+        customer.set(1, customer1)
+        customer.set(2, customer2)
+
+        console.log(customer)
+        // Ou
+        for(let cus of customer.values()) {
+            console.log(cus.get('firstname'))
+        }
+
+        // Set
+        const set = new Set()
+        const set2 = new Set()
+        set.add('John')
+        set.add('Jane')
+        set.add('John') // Ici il ne va pas ajouter une nouvelle valeur car on ne peut pas avoir 2x la même valeur
+        console.log(set.has('John')) // Permet de vérifier si la valeur existe
+        set.delete('John') // Supprime
+        // set.size() -- Taille du set
+
+        const a = new Set([2, 'a', 1, true])
+        const b = new Set([2, 'b', 4, true])
+        const intersection = a.intersection(b) // Nous donne les valeurs identique dans les 2 tableaux
+        const union = a.union(b) // Unie les deux tableaux
+        const difference = a.difference(b) // Les valeurs différentes des 2 tableaux
+        console.log(
+            intersection,
+            union,
+            difference
+        )
+
+        for(const name of set) {
+            // ...
+        }
+
+        const names = ['John', 'Jane', 'Doe', 'John']
+        console.log(
+            new Set(names) // Ici va nous donner un tableau avec un seule John, On peut mettre utiliser Array.from dessus car c'est un itterator, va nous donner les résultats sous forme de tableau
+        )
+
+        // --
+        const persons = [
+            {name: 'Jane Doe', age: 28},
+            {name: 'Hanry Doe', age: 32}
+        ]
+        const ul = document.querySelector('ul')
+        const liMap = new Map()
+
+        persons.forEach(person => {
+            const li = document.createElement('li')
+            li.innerHTML = `<strong>${person.name}</strong>: ${person.age}`
+            ul.appendChild(li)
+            liMap.set(person, li)
+        })
+
+        console.log(liMap.get(persons[1])) // Je veux le li correspondant à la second peronne
+
+        const persons2 = [
+            {name: 'John Doe', age: 28},
+            {name: 'Jane Doe', age: 18},
+            {name: 'Hanry Doe', age: 32}
+        ]
+
+        class UniqueSet {
+
+            #map = new Map()
+
+            constructor(cb, items) {
+                for(const item of items) {
+                    const key = cb(item)
+                    if(!this.#map.has(key)) {
+                        this.#map.set(key, item)
+                    }
+                }
+            }
+
+            delete(key) {
+                this.#map.delete(key)
+            }
+
+            values() {
+                return this.#map.values()
+            }
+        }
+
+        const p = new UniqueSet((p) => p.id, persons2)
+        p.delete(0)
+        console.log(Array.from(p.values()))
+    </script>
+
+</body>
+</html>

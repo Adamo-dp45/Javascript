@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curryfication</title>
+</head>
+<body>
+
+    <script>
+        // Processus qui consiste à transformer une fonction qui attend plusieurs arguments en plusieurs fonctions qui vont attendre un argument
+
+        function multiply(a, b) {
+            return a * b
+        }
+        console.log(multiply(2, 4)) // Normalement
+
+        // multiply(2)(4) -- Curry
+
+        function curry(fn) { // Ici on n'a utiliser deux params
+            return function(a) {
+                return function(b) {
+                    return fn(a, b)
+                }
+            }
+        }
+        const items = [1, 2, 3, 4]
+        console.log(items.map(curry(multiply)(2))) // Va multiplier tous éléments par 2
+
+        /**
+         * Remplace les paramètres en commençant par la droite
+         */
+        function curryRight(fn) {
+            return function(a) {
+                return function(b) {
+                    return fn(b, a)
+                }
+            }
+        }
+        // items.map(parseInt) -- Ne marche pas car map(item, index => parseInt(item, index))
+        console.log(items.map(curryRight(parseInt)(10)))
+
+        function log(a, b, c) {
+            console.log([a, b, c])
+        }
+
+        /**
+         * Curry qui fonctionne quelque soit le nombre de paramètre
+         */
+        function cur(func, arity = null) {
+            return function curried(...args) {
+                if(args.length >= (arity || func.length)) {
+                    return func.apply(this, args)
+                }
+                return curried.bind(this, ...args)
+            }
+        }
+
+        function curRight(func, arity = null) {
+            return function curried(...args) {
+                if(args.length >= (arity || func.length)) {
+                    return func.apply(this, args)
+                }
+                return function (...args2) {
+                    return curried.apply(this, [...args2, ...args])
+                }
+            }
+        }
+
+        console.log(cur(log)(1, 2, 3))
+        console.log(cur(log)(1)(2)(3))
+        console.log(cur(log)(1, 2)(3))
+
+        console.log(curRight(log)(1, 2, 3))
+        console.log(curRight(log)(1)(2)(3))
+        console.log(curRight(log)(1, 2)(3))
+    </script>
+
+</body>
+</html>

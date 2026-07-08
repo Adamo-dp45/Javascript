@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="./build/app.css">
+    <script src="./build/app.js" defer type="module"></script>
+</head>
+<style>
+    /*
+        --skeleton: rgb(57, 57, 102); -- Pour modifier la couleur de skeleton
+        --skeleton-wave: rgb(57, 57, 102); -- Pour modifier le linear-gradient
+    */
+</style>
+<body>
+
+    <nav class="header">
+        Header
+    </nav>
+
+    <scroll-top class="scroll-top" hidden="hidden">
+        <svg width="100%" height="100%" viewBox="0 0 7 5" xmlns="http://www.w3.org/2000/svg" style="stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 1.5; fill: none;">
+            <path d="M1,4l2.5,-3l2.5,3" stroke="#FFF" stroke-width="1.4"></path>
+        </svg>
+    </scroll-top>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!--
+        <div id="swupp" class="transition-fade">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis facere natus enim non dignissimos repellat, voluptas eligendi temporibus molestias fugiat deserunt expedita tempora animi fuga autem amet exercitationem nemo asperiores.
+        </div>
+    -->
+
+    <div id="toast"></div>
+
+    <div class="mb-4"></div>
+    <div class="container">
+        <h1 class="display-6">JavaSript</h1>
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <a href="./animation mot par mot/index.html">Animation Mot par mot</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./carousel/carousel gestion du tactile/index.html">Carousel</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./drawing/carte interactive en svg/index.html">Carte Svg</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./décompte/index.html">Décompte</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./dragndrop/redimensionnement/index.html">Redimensionnement drag n drop</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./dragndrop/reorganisation/index.html">Réorganisation drag n drop</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./effet de parallaxe au défilement/index.html">Effet parallaxe au défilement</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./indicateur de menu animé/index.html">Indicateur menu animé</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./modal/index.html">Modal</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./threejs/panorama 360°/index.html">Panorama</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./effet fisheye du dock de macOS/index.html">Effet fisheye macOS</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./système d'accès rapide à la spotlight/index.html">Spotlight</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./zoom produit/index.html">Zoom produit</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./tabs/index.html">Tabs</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./scrollspy/index.html">ScrollSpy</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./autogrow/index.html">Textarea autogrow</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./tooltip/index.html">Tooltip</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./portfolio/index.html">Portfolio</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./drawing/canvas/index.html">Canvas</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./timer relatif/index.html">Temps relatif</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./lightbox/index.html">Lightbox</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./calendrier mensuel/index.html">Calendrier mensuel</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./champs de type code/index.html">Champs de type code</a>
+            </div>
+            <div class="col-md-3">
+                <a href="./grille photos adaptative/index.html">Grille de photos adaptative</a>
+            </div>
+        </div>
+        <hr>
+        <h2 class="display-6">Library</h2>
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <a href="./transition en mosaïque avec curtainsjs/index.html">Transition en mosaïque</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./drawing/d3/index.html">D3 js - Graphique sur mésure</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./threejs/particules 3d three js/index.html">Particules 3D avec Three.js</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./threejs/panorama 360°/index.html">Panorama 360°</a>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="./revealjs/index.html">Reveal js</a>
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="piker" class="form-control">
+            </div>
+            <!--
+                <div class="col-md-3">
+                    <select name="" data-select id="" style="width: 100%;">
+                        <option value="value1">Valeur 1</option>
+                        <option value="value2">Valeur 2</option>
+                    </select>
+                </div>
+            -->
+        </div>
+        <hr>
+        <input
+            type="file"
+            multiple
+            name="files[]"
+            label="Drop files here or click to upload."
+            help="Upload files here and they won't be sent immediately"
+            is="drop-files"
+        /> <!--
+                'is' Api custom élement des naviagteurs
+                Dans la documentation il y'a un polyfill
+        -->
+        <hr>
+        <spinning-dots></spinning-dots> <!-- Cela créera un chargeur avec une largeur de 68 px -->
+        <spinning-dots style="width:100px;"></spinning-dots> <!-- Tout évolue en fonction de la largeur -->
+        <spinning-dots style="width:100px; stroke-width:5px; color: #535FF6;" dots="10"></spinning-dots> <!-- Toutes les configurations possibles -->
+        <hr>
+        <textarea name="" id="mdn"></textarea>
+        <hr>
+        <form action="">
+            <input type="file"
+                class="filepond"
+                name="filepond" 
+                multiple 
+                data-allow-reorder="true"
+                data-max-file-size="3MB"
+                data-max-files="3"
+            >
+        </form>
+        <hr>
+        <div class="dropzone"></div>
+        <hr>
+        <button id="menu" class="btn">Afficher la sidebar</button>
+        <button class="bottom btn">Bottom</button>
+        <!--
+            <div class="sidebar">
+                <div style="height: 100px;"></div>
+                <a href="" class="icon icon-user">Utilisateur</a>
+                <a href="" class="icon icon-inbox">Mes articles</a>
+                <a href="" class="icon icon-group">Mes sujets suivis</a>
+            </div>
+        -->
+        <button
+            class="btn"
+            onclick="openWindow()"
+        >Ouvrir une fenêtre</button>
+        <div class="m-alert">
+            <strong>Message d'alerte</strong>
+            <div class="m-alert-close">x</div>
+        </div>
+        <hr>
+        <button
+            id="button"
+            onclick="document.querySelector('modal-dialog').removeAttribute('hidden')"
+            class="btn"
+        >
+            Modal
+        </button>
+        <nav-tabs class="tabs-bar" style="margin-bottom: 20px;">
+            <a href="#tabar1" aria-selected="true">
+                <!-- Svg - class="icon" -->
+                Nav 1
+            </a>
+            <a href="#tabar2">Nav 2</a>
+        </nav-tabs>
+
+        <div id="tabar1" style="margin-bottom: 30px;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat deserunt explicabo placeat sed qui labore nam soluta aperiam quia. Quas ipsum suscipit magnam, hic in labore expedita alias reiciendis eum.
+        </div>
+        <div id="tabar2" hidden="hidden" style="margin-bottom: 30px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, hic assumenda. Animi, rerum debitis recusandae, quisquam nisi suscipit sequi exercitationem quam magni id iste vel molestias inventore, voluptatibus ullam mollitia.
+        </div>
+
+        <tab-bar class="tabs-bar" style="margin-bottom: 20px;">
+            <a href="#tabs1" aria-selected="true">
+                <!-- Svg - class="icon" -->
+                Tab 1
+            </a>
+            <a href="#tabs2">Tab 2</a>
+        </tab-bar>
+
+        <div id="tabs1" style="margin-bottom: 30px;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat deserunt explicabo placeat sed qui labore nam soluta aperiam quia. Quas ipsum suscipit magnam, hic in labore expedita alias reiciendis eum.
+        </div>
+        <div id="tabs2" hidden="hidden" style="margin-bottom: 30px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, hic assumenda. Animi, rerum debitis recusandae, quisquam nisi suscipit sequi exercitationem quam magni id iste vel molestias inventore, voluptatibus ullam mollitia.
+        </div>
+
+        <nav-tabs class="nav-pills" style="margin-bottom: 20px;">
+            <a href="#tab1">Tab 1</a>
+            <a href="#tab2" aria-selected="true">Tab 2</a>
+        </nav-tabs>
+
+        <div id="tab1" hidden="hidden">
+            <p>
+                Lorem ipsum dolor <a href="https://github.com">github link</a> amet
+            </p>
+        </div>
+        <div id="tab2" hidden="hidden">
+            <p>
+                Eum libero nemo excepturi labore exercitationem et? Et, perspiciatis
+            </p>
+        </div>
+
+        <nav-tabs class="nav-pills">
+            <button aria-controls="tab1">Tab 1</button>
+            <button aria-controls="tab2" aria-selected="true">Tab 2</button>
+        </nav-tabs>
+        <hr>
+        <alert-message type="danger" duration="20">Alerte info</alert-message>
+        <alert-message class="is-floating" type="info" duration="20">Alerte info flotant</alert-message>
+        <alert-message type="success" duration="20"><strong>Félicitations !</strong></alert-message>
+        <alert-floating type="warning" duration="10">Alerte Floating</alert-floating>
+        <hr>
+        <skeleton-box text="chargement..."></skeleton-box>
+        <skeleton-box width="80%" height="30px" text="Chargement"></skeleton-box>
+        <skeleton-box width="50" height="50" rounded></skeleton-box>
+        <skeleton-box lines="3"></skeleton-box>
+        <div id="content" style="display:none;">
+            <p class="lead">
+                Contenu affiché après le chargement skeleton
+            </p>
+        </div>
+        <script>
+            setTimeout(function() { // Simuler le chargement du contenu
+                document.getElementById('content').style.display = 'block'
+                const skeletons = document.querySelectorAll('skeleton-box')
+                skeletons.forEach(skeleton => skeleton.style.display = 'none') // Cacher les skeletons
+            }, 5000)
+        </script>
+
+        <cookie-banner role="region" aria-labelledby="label" hidden="hidden">
+            <p>Whatever content you may want</p>
+            <form action="">
+                <p>
+                    <input type="checkbox" disabled checked> Required cookie
+                    <input type="checkbox" name="tracking" value="1" checked> Tracking cookies
+                </p>
+                <p>
+                    <button data-accept>I accept</button>
+                    <button data-reject>I refuse</button>
+                </p>
+            </form>
+        </cookie-banner>
+        <hr>
+        <button id="pdf" class="btn btn-danger">Exporter en Pdf</button>
+        <button id="excel" class="btn btn-success">Exporter en Excel</button>
+        <table id="table" class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>johndoe@example.com</td>
+                    <td>2025-04-15</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mb-3 lead p-3" style="border: 1px solid #CCC;" data-tilt>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure incidunt voluptatibus culpa necessitatibus, maxime eius aut quam tenetur illo accusamus veritatis repudiandae impedit tempore, obcaecati suscipit aspernatur, enim commodi cumque?
+        </div>
+    </div>
+
+    <div class="container">
+        <button class="btn btn-primary mb-3" id="toggle-view">Changer en Grille</button>
+        <div class="list-view" id="grid">
+            <div class="item">Élément 1</div>
+            <div class="item">Élément 2</div>
+            <div class="item">Élément 3</div>
+            <div class="item">Élément 4</div>
+            <div class="item">Élément 5</div>
+        </div>
+    </div>
+
+    <div style="position: relative;">
+        <modal-dialog hidden="hidden" overlay-close>
+            <div class="modal-box">
+                <header>Demonstration</header>
+                <form action="" class="stack">
+                    <div>
+                        <label for="firstname">Firstname</label>
+                        <input type="text" name="firstname" id="firstname" />
+                    </div>
+                    <div>
+                        <label for="lastname">Lastname</label>
+                        <input type="text" name="lastname" id="lastname" />
+                    </div>
+                </form>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad autem
+                    corporis delectus deserunt doloremque fuga fugit hic in magni
+                    molestiae, nesciunt nisi optio rem, sint tempore velit vero?
+                    Architecto, consequatur.
+                </p>
+                <footer>
+                    <button data-dismiss>Cancel</button>
+                    <button data-dismiss id="okbutton">Ok</button>
+                </footer>
+                <button
+                    data-dismiss
+                    aria-label="Close"
+                    class="modal-close"
+                    id="closebutton"
+                >
+                    x
+                </button>
+            </div>
+        </modal-dialog>
+    </div>
+
+    <script>
+        let zIndex = 1;
+        function openWindow() {
+            const win = document.createElement('div')
+            win.className = 'window'
+            win.style.zIndex = ++zIndex
+            win.innerHTML = `
+                <div class="title-bar">
+                    <span>Nouvelle fenêtre</span>
+                    <span class="close-btn" onclick="this.closest('.window').remove()">×</span>
+                </div>
+                <div class="content">
+                    Contenu de la fenêtre à ${new Date().toLocaleTimeString()}
+                </div>
+            `
+            document.body.appendChild(win)
+            makeDraggable(win)
+        }
+
+        function makeDraggable(win) {
+            const bar = win.querySelector('.title-bar')
+            let isDragging = false, offsetX = 0, offsetY = 0
+
+            bar.addEventListener('mousedown', (e) => {
+                isDragging = true
+                win.style.zIndex = ++zIndex
+                offsetX = e.clientX - win.offsetLeft
+                offsetY = e.clientY - win.offsetTop
+            })
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    win.style.left = (e.clientX - offsetX) + 'px'
+                    win.style.top = (e.clientY - offsetY) + 'px'
+                }
+            })
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false
+            })
+        }
+    </script>
+</body>
+</html>

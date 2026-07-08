@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expr</title>
+</head>
+<body>
+
+    <fieldset style="margin-bottom: 12px;">
+        <label for="time">Heure (au format HH:MM)</label>
+        <input type="text" id="time" placeholder="Ex: 02:30" maxlength="5">
+    </fieldset>
+    <button type="submit" role="button" disabled>Envoyer</button>
+
+    <script>
+        const expr = /^[a-z]+$/
+        const expr1 = new RegExp('^[a-z]+$', 'gi') // Prend en premier paramètre le contenu de notre expr sans les // et ensuite le drapeau, gi(géneral), Si on veut mettre des / il faudra en mettre 2 car 1 échape \\d[a-z]+$
+
+        console.log(
+            expr1.test('aaazazazza'),
+            //expr1.exec('aazza') -- Donne la première correspondance, agit comme un while
+            // 'Bonjour les gens'.match(expr), -- Pour capturer une correspondance
+            // 'Bonjour les gens'.matchAll(expr)
+        ) // Images correspondance le premier groupe et le second groupe, drapeaux g un tableau des différentes correspondance, matchAll correspondance et ensuite les différentes groupes qui ont été capturés
+
+        // Ex d'utilisation
+        const button = document.querySelector('button')
+        const input = document.querySelector('input')
+
+        const timeRegex = /(2[0-3]|[01]\d):[0-5]\d/
+
+        input.addEventListener('input', () => {
+            if(timeRegex.test(input.value)) {
+                button.removeAttribute('disabled')
+            } else {
+                button.setAttribute('disabled', '')
+            }
+        })
+
+        const exprTp = /(\d{2}):(\d{2})/ // Groupe de 2 entier et eux même leur groupes
+        const exprTpg = /(\d{2}):(\d{2})/g // Groupe de 2 entier en globale
+        const description = `
+            00:00 Introduction
+            01:02 Les symboles
+            05:40 Conclusion
+        `
+        console.log(
+            description.match(exprTp), // 00:00 - 00 - 00
+            description.match(exprTpg), // 00:00 - 01:02 - 05:40
+            Array.from(description.matchAll(exprTpg)) // Les récupérer sous forme de tabeaux pour ensuite pouvoir ittérer
+        )
+
+        for(const match of description.matchAll(exprTpg)) {
+            const min = match[1]
+            console.log(min) // 00 - 01 - 05
+        }
+
+        const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+        console.log(
+            'adamo.dp45@gmail.com'.match(pattern)
+        )
+
+        // --- Expr - regex101.com : Permet de debegguer et tester notre expression --- //
+
+        // -- Syntax
+        /t[ea]nte/ /* -Ou- */ /te|ante/ // Cherche le mot tante ou tente
+        /t[a-z]nte/ // Cherche t(a,b,c..)nte
+        /[a-z0-9]/ // N'importe quel lettre qui est crompris entre a et z et 0 et 9
+        /[A-Za-z0-9]/ // && et capture les grands caractère
+        /./ // N'importe quel caratère dans une chaîne de caractère
+        /\d/ // Un nombre
+        /^\d$/ // ^ commence au debut de la ligne et $ à la fin
+        /[^"]/ // Tous les caractères qui ne sont pas des "
+
+        // -- Quantificateur
+        /\d{2}/ // Deux nombres consécutifs
+        /\d{1,2}/ // Un nombre qui repéter 1 fois ou 2 fois
+        /\d{1,}/ // Un nombre ou plus de 1 nombre
+        /\d*/ // Caratère 0 ou plus d'une fois
+        /\d+/ // Une fois ou plus
+        /\d?/ // 0 ou une fois
+
+        // -- Drapeaux : Permet de modifier le comportement d'une expression régulière
+        /\d+/g // Permet de faire une capture globale et d'avoir plusieurs occurences de l'expression, car par défaut une expression régulière s'arrête a la première expression qu'elle trouve
+        /ans/i // Permet d'avoir une chaîne qui est non sensible à la casse (majuscule ou miniscule)
+        /ans/gi // Globale et non sensible à la casse
+
+        // -- Groupe de capture
+        /ch(ien|at)/gi // Cherche chat et chien
+        /(pa){2}/gi // Cherche pa 2x - papa
+    </script>
+</body>
+</html>

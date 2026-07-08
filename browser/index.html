@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - Navigateur</title>
+    <script src="../src/js/script.js" defer></script> <!-- Ici quand on utilse 'async' dans le script: il peut charger le javascript pendant le chargement de la page -->
+</head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color: blue;
+    }
+</style>
+<body>
+
+    <ul style="margin-bottom: 30px;">
+        <li class="red">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, expedita. Veniam sit consequuntur voluptatum similique natus perspiciatis saepe inventore. Tempore illo aliquid nulla molestiae, sunt corrupti reiciendis cum veritatis doloribus.</li>
+        <li>Sapiente dolores, accusamus harum recusandae est cupiditate doloribus libero, ab odio quo itaque repudiandae modi laborum? Natus repudiandae labore dolore possimus facilis, explicabo corporis amet laborum praesentium distinctio. Alias, officiis.</li>
+        <li>Assumenda, asperiores autem, id corporis ullam numquam, nemo perferendis nihil sunt sapiente dolore sed. Ipsa voluptatem quae consectetur, ratione dolore inventore placeat harum rerum similique culpa fuga molestias quisquam atque.</li>
+    </ul>
+
+    <h1>Hello</h1>
+    <div class="div" data-user="John"></div>
+
+    <button id="add">Ajouter le localStorage</button>
+    <button id="clear">Effacer le localStorage</button>
+
+    <div id="posts"></div>
+
+    <script>
+        function isEmoji(code) {
+            return code
+                .split('')
+                .map(letter => letter.charCodeAt(0) % 32 + 0x1F1E5)
+                .map(n => String.fromCodePoint(n))
+                .join('')
+        }
+        console.log(
+            isEmoji('fr')
+        )
+
+        // -- Version PHP
+        /*
+            function isEmoji(string $code) {
+                return implode(
+                    '',
+                    array_map(
+                        fn($letter) => mb_chr(ord($letter) % 32 + 0x1F1E5),
+                        str_split($code)
+                    )
+                )
+            }
+        */
+    </script>
+</body>
+</html>

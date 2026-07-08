@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox</title>
+    <link rel="stylesheet" href="./app.css">
+    <link rel="stylesheet" href="../build/lightgallery.css">
+    <script src="./body-scroll-lock.js" type="module"></script> <!-- Permet d'activer ou désactiver le scrolling -->
+    <script src="../build/lightgallery.js" defer></script>
+    <script src="./app.js" defer></script>
+</head>
+<body>
+
+    <div class="grid">
+        <a href="./img/1022313.png">
+            <img src="./img/1022313.png" alt="">
+        </a>
+        <a href="./img/BLACK CLOVER.png">
+            <img src="./img/BLACK CLOVER.png" alt="">
+        </a>
+        <a href="./img/JUJUTSU KAISEN.jpg">
+            <img src="./img/JUJUTSU KAISEN.jpg" alt="">
+        </a>
+        <a href="./img/wallhaven-1pd95w.png">
+            <img src="./img/wallhaven-1pd95w.png" alt="">
+        </a>
+        <a href="./img/wallhaven-1pdz21.png">
+            <img src="./img/wallhaven-1pdz21.png" alt="">
+        </a>
+        <a href="./img/wallhaven-7pmqee.png">
+            <img src="./img/wallhaven-7pmqee.png" alt="">
+        </a>
+        <a href="./img/wallhaven-8o8xxy.jpg">
+            <img src="./img/wallhaven-8o8xxy.jpg" alt="">
+        </a>
+    </div>
+
+    <div class="grid" id="gallery"> <!-- Lightgallery -->
+        <a href="./img/BLACK CLOVER.png" data-sub-html="<h4>Montagnes et lac</h4>"> <!-- data-sub-html pour le sous titre -->
+            <img src="./img/BLACK CLOVER.png" alt="Photo 1">
+        </a>
+        <a href="./img/JUJUTSU KAISEN.jpg">
+            <img src="./img/JUJUTSU KAISEN.jpg" alt="Photo 2">
+        </a>
+        <a href="./img/wallhaven-1pd95w.png">
+            <img src="./img/wallhaven-1pd95w.png" alt="Photo 3">
+        </a>
+        <!-- Support de vidéos youtube ou mp4 - plugin lgVideo
+        <a
+            href="videos/demo.mp4"
+            href="https://www.youtube.com/watch?v=ScMzIvxBSi4"
+            data-lg-size="1280-720"
+        >
+            <img src="thumbs/youtube.jpg" alt="Vidéo YouTube" />
+        </a>
+        -->
+    </div>
+
+    <!--
+        - Le code html de la lightbox va être rajouter à la fin de la page
+            <div class="lightbox">
+                <button class="lightbox-close">Fermer</button>
+                <button class="lightbox-next">Suivant</button>
+                <button class="lightbox-prev">Précédent</button>
+                <div class="lightbox-container">
+                    <img src="./img/JUJUTSU KAISEN.jpg" alt="">
+                </div>
+            </div>
+
+        - Amélioration :
+            - On peut ajouter la possibilité de faire un zoom sur l'image au lieu de scroller
+            - La possibilité d'avoir plusieurs galleries qui au clic n'affiche que les images qui correspondent a cette gallerie
+            - Gérer le cas ou on n'a deux fois la même image sinon il fera une boucle infinie - on pourrais dédupliquer notre tableau et de retirer les fois ou on a de la duplication
+            - On peut ajouter la gestion du tactile
+    -->
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+:root {
+    --background: #FFFFFF;
+    --color: #000000;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--color);
+}
+
+body.dark {
+    --background: #000000;
+    --color: #FFFFFF;
+}
+
+/* --- Reveal --- */
+.reveal-loader .reveal [class*="reveal-"] {
+    opacity: 0!important;
+    transform: translateY(30px)!important;
+    transition: 0s!important;
+}
+
+.reveal-loader [class*="reveal-"] {
+    transition: 1s cubic-bezier(.5, 0, 0, 1);
+}
+
+.reveal-loader .reveal-2 {
+    transition-delay: .1s;
+}
+
+.reveal-loader .reveal-3 {
+    transition-delay: .2s;
+}
+
+.reveal-loader .reveal-4 {
+    transition-delay: .3s;
+}
+
+@media (prefers-reduced-motion: reduce) { /* Si l'ecran est reduite */
+    .reveal [class*="reveal-"] {
+        opacity: 1!important;
+        transform: translateY(0px)!important;
+    }
+    [class*="reveal-"] {
+        transition-duration: 0s!important;
+        transition-delay: 0s!important;
+    }
+}
+
+/* --- Animation frame --- */
+.request {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #999;
+    transition: transform 3s;
+}
+
+.request.right {
+    transform: translateX(500px);
+}
+
+/* --- Scroll reveal --- */
+[data-reveal="left"] {
+    clip-path: inset(0 100% 0 0); /* Css Clip path marker --site */
+}
+
+[data-reveal="left"].revealed {
+    animation: revealLeft 1.2s cubic-bezier(0.17, 0.97, 0.38, 1) forwards 300ms;
+}
+
+@keyframes revealLeft {
+    0% {
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+[data-reveal="right"] {
+    clip-path: inset(0 0 0 100%);
+}
+
+[data-reveal="right"].revealed {
+    animation: revealRight 1.2s cubic-bezier(0.17, 0.97, 0.38, 1) forwards 300ms;
+}
+
+@keyframes revealRight {
+    0% {
+        clip-path: inset(0 0 0 100%);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}

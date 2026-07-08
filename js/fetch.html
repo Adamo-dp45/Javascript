@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fecth</title>
+</head>
+<body>
+
+    <button id="loadData" style="margin-bottom: 20px;">Charger les données</button>
+    <div id="data"></div>
+
+    <script>
+        /* Fetch - Permet de contacter un serveur pour pouvoir recupérer des informations, Fais des appel http
+        const r = fetch('https://jsonplaceholder.typicode.com/users')
+        console.log(r)
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(p => console.log(p)) // Ici p sera un objet de type Response
+        */
+
+        async function fetchUser() {
+            const u = await fetch('https://jsonplaceholder.typicode.com/users', {
+                method: 'GET', // On peut POST
+                headers: {
+                    "Accept": "application/json",
+                    // "Content-Type": "application/json" -- Permet d'indiquer les données que nous on vas envoyé
+                },
+                // credentials: 'same-origin', -- Permet de définir comment vont être envoyer les informations de l'utilisateur comme les cookies ou les en-tête d'authentification
+                    /*
+                        same-origin : Si on fais un fetch sur la même origine il va inclure les cookies par si on contact un domaine différents les cookies ne vont être inclus
+                        include : Inclus les cookies lorsqu'on contact un nom de domaine différent, dans ce cas la cookie doit avoir le 'secure' a true, 'samesite' a none
+                    */
+                // body: JSON.stringify({title: "Mon permier article"}) -- Pour le POST
+            })
+            // console.log(u.headers.get('Content-Type')) -- Montre quel Content-Type utilise le serveur, On peut aussi modifier les en-têtes de cette manière
+            if(u.ok === true) {
+                return u.json()
+            }
+            throw new Error('Impossible de contacter le serveur')
+        }
+
+        fetchUser().then(users => console.log(users)) // Pour recevoir des informations
+
+
+        // Si je souhaite arrêter une requête fecth au cas ou je fais deux rêquête et que celui qui repond le premier soit pris en charge et l'autre annulée
+        const a = new AbortController() // Permet d'envoyer un signal pour annuler des requêtes Http
+
+        Promise.race([
+            fetch('https://jsonplaceholder.typicode.com/users/?_delay=2000', {
+                signal: a.signal
+            }),
+            fetch('https://jsonplaceholder.typicode.com/posts/?_delay=500', {
+                signal: a.signal
+            })
+        ]).then(r => r.json()).then(body => {
+            a.abort() // Pour arrêter les autres
+            console.log(body)
+        })
+
+
+        // -- Ajax -- //
+        const button = document.getElementById('loadData')
+        const data = document.getElementById('data')
+
+        button.addEventListener("click", function () {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', 'getUser.php', true)
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    data.innerHTML = xhr.responseText
+                } else {
+                    data.style.color = 'red'
+                    data.innerHTML = 'Une erreur est survenue'
+                }
+            }
+            xhr.send()
+
+            // Ou ..
+            /*
+                req.onreadystatechange = function() { -- En général il est avant
+                    if(req.readyState == 4 && (req.status == 200 || req.status == 0)) {
+                        console.log(req)
+                        let donnees = JSON.parse(req.response) -- Vu qu'on reçoit du json, il va nous le parse
+                        console.log(donnees)
+                        Object.entries(donnees.produits).forEach(element => {
+                            console.log(element) -- Ici produits provient du resultat qu'on a reçu
+                        })
+                    } else if(req.readyState < 4) {
+                        console.log(req.readyState)
+                    }
+                }
+                req.open("GET", 'https://api/test.php', false) -- 'false' pour le rendre sync
+            */
+
+            // -- POST
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 201) {
+                    let response = JSON.parse(req.response)
+                    console.log(response.message)
+                }
+            }
+            let produits = {
+                nom: 'Pate',
+                description: 'lorem dbvdvdbd,d ',
+                prix: 12000,
+                category_id: 5
+            }
+            xhr.open('POST', 'post.php', true)
+            xhr.send(JSON.stringify(produits))
+        })
+    </script>
+
+</body>
+</html>

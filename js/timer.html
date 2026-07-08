@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temps</title>
+</head>
+<body>
+
+    <script>
+        // Cette fonction est sync
+        function wait(duration) { // Si on doit attendre avant de faire quelque chose, il faut éviter ça car il est bloquant, mieux vaut utiliser le setTimeout
+            const t = Date.now()
+            while(Date.now() - t < duration) {
+
+            }
+        }
+        console.log('Bonjour')
+        wait(2000)
+        console.log('les gens')
+
+        const s = setTimeout(() => { // Lui est async
+            console.log('Temps de setTime')
+        }, 3000) // Si on a des operations lourdes, il n'est pas garentie qu'il sera executer au bout de 3s
+        console.log('Au revoir')
+        console.log(clearTimeout(r)) // Supprime le timer
+        // Quand on le met dans une variable il retourne un numéro unique avec laquel on peut décidé de l'arrêté
+
+        setInterval(() => { // Permet de faire une opération au bout d'un temps régulier
+            console.log('Compte')
+        }, 2000)
+
+        const r = setInterval(() => { // Elle a aussi un retour, on pourra ainsi le retrouver et le stoper si on le souhaite
+            console.log('Compte')
+        }, 2000)
+        console.log(clearInterval(r)) // Supprime
+
+        // Tp Decompte
+        let i = 0
+        const arret = setInterval(() => {
+            i++
+            console.log('Bonjour')
+            if(i >= 5) {
+                clearInterval(arret)
+            }
+        }, 1000)
+
+        function decompte(n) { // Le risque de celui-ci est qu'on peut oublier de clear si qui peut faire tourner en tâche de fond
+            console.log(n)
+            const t = setInterval(() => {
+                n--
+                console.log(n)
+                if(n === 0) {
+                    clearInterval(t)
+                }
+            }, 1000)
+        }
+        decompte(10)
+        decompte(3)
+
+        function decomptesetTime(n) {
+            console.log(n)
+            if(n === 0) {
+                return
+            }
+            setTimeout(() => {
+                decomptesetTime(n - 1)
+            }, 1000)
+        }
+        decomptesetTime(20)
+
+        // -- Pour éviter de faire des callback dans des callback on utilise Promise qui plus propre
+    </script>
+
+</body>
+</html>

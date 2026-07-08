@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Js</title>
+    <script src="./layout/simplepeer.js"></script>
+    <script src="../src/js/api.js" defer></script>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<body>
+
+    <button class="btn" id="fullscreen">Plein écran</button>
+
+    <p id="copy">
+        Voici le texte à copier
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" fill="currentColor" class="c">
+            <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 18H8V7h11v16z"/>
+        </svg>
+    </p>
+    <p id="status"></p>
+
+    <h2>Synthèse vocale - SpeechSynthesis</h2>
+    <textarea id="text" rows="5" cols="50" placeholder="Écris quelque chose ici..."></textarea><br><br>
+    <button id="speak-btn">Parler</button>
+    <button id="stop">Arrêter</button>
+
+    <h1>Reconnaissance vocale en JavaScript</h1>
+    <button id="start-btn">Démarrer la reconnaissance</button>
+    <button id="stop-btn">Arrêter la reconnaissance</button>
+    <p><strong>Résultat :</strong> <span id="result"></span></p>
+    <p id="action"></p>
+
+    <h2>Lecture audio</h2>
+    <input type="file" id="audio-file" accept="audio/*"><br><br>
+    <audio id="audio" controls></audio><br>
+    <label>Volume : <input type="range" id="volume" min="0" max="1" step="0.01" value="1"></label>
+    <label>Vitesse : <input type="range" id="playbackRate" min="0.5" max="2" step="0.1" value="1"></label>
+
+    <h2>Enregistrement audio</h2>
+    <button id="start-record">Démarrer l'enregistrement</button>
+    <button id="stop-record">Arrêter l'enregistrement</button>
+    <audio id="recorded-audio" controls></audio>
+    <a id="download" href="" download="enregistrement.wav">Télécharger l'enregistrement</a>
+
+    <h2>Visualisation audio</h2>
+    <canvas id="visualizer" width="600" height="200"></canvas>
+
+    <h2>Lecture vidéo</h2>
+    <input type="file" id="video-file" accept="video/*"><br><br>
+    <video id="video" width="480" height="270" controls></video><br>
+    <div id="video-controls">
+        <label>Volume: <input type="range" id="volume" min="0" max="1" step="0.01" value="1"></label>
+        <label>Vitesse: <input type="range" id="playbackRatev" min="0.5" max="2" step="0.1" value="1"></label>
+    </div>
+
+    <!--
+        Permet de faire de la communication instantané dans le navigateur
+
+        - Se traduit par ces Api
+            - MediaStream : Permet d'accéder au média de l'utilisateur, webcam, micro ..
+            - PeerConnection : Gère l'encodage et le décodage de flux, permet de gérer la connection entre 2 utilisateurs
+            - DataChannel : Permet de gérer la transimition de données entre 2 utilisateurs
+
+        - Pour passer le pare-feu on vas utiliser un serveur 'stun' qui a pour but de donner la route pour nous contacter, mais on a aussi besoin d'un serveur 'turn' qui a pour but de rediriger le trafic, pour les cas ou on a plusieurs machines qui communiquent on utilise un serveur 'mcu' qui est charger de récupérer les données de tous le monde et les retransmettre
+            - simple-peer : Librairie pour la partie échange des signaux et communication réseau
+
+        - Le WebRTC permet d'accéder à la caméra, au microphone et aux périphériques externes
+    -->
+
+    <h2>Enregistrement webcam</h2>
+    <video id="webcam" width="480" height="270" autoplay muted></video><br>
+    <button id="start-recorder">Démarrer enregistrement</button>
+    <button id="stop-recorder">Arrêter enregistrement</button><br>
+    <video id="recorded-video" width="480" height="270" controls></video>
+    <a id="download" href="" download="enregistrement.webm">Télécharger l'enregistrement</a>
+
+</body>
+</html>

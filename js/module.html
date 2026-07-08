@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modules</title>
+</head>
+<body>
+
+    <script type="module">
+        // Permet de separer notre dans différent fichier, cela permet de nous oragniser et eviter d'avoir plusieurs lignes a voir plustard
+        import {sum as somme, hello, default as def} from '../assets/js/array.js'
+        console.log(somme([12, 13, 8]))
+        hello()
+        def()
+
+        // importer tous dans une grosse variable 
+        import * as A from '../assets/js/array.js'
+        console.log(A.sum([12, 13, 15]))
+
+        // Il est possible d'importer des modules de manière async
+        console.log(import('../assets/js/array.js').then((...args) => { // Ou then((hello)), ou {default: incr}
+            console.log(args)
+        })) // Ou ..
+
+        const {hello} = await import('../assets/js/array.js')
+        console.log(hello())
+
+        // Si on n'a le support des modules on peut aplleler une fonction qui s'auto execute
+        (async function() {
+
+        })()
+    </script>
+
+</body>
+</html>

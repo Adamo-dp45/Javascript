@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+
+    <script>
+        /*
+            Les prototypes sont comme des types personnalisés. On le fera grâce a la syntaxe des class. les prototypes sont des fonctions
+            On a la possiblité de donné des propriétés, par exemple on peut s'imaginer que tous nos étudiants seront dans la même école
+            Pour appeler une fonction dans les class pas besoin de mettre le mot clé function
+            Les class on peut créer des méthodes qui vont être partagé, on peut utiliser des methodes pour avoir des retours
+        */
+
+        // str >> String.prototype >> Object.prototype -- Système d'héritage
+
+        const moyenne = (notes) => {
+            let sum = 0
+            for (let note of notes) {
+              sum = sum + note
+            }
+            return sum / notes.length // notes.length signifie le nombre de note qu'il y'a
+        }
+
+        class Student {
+            ecole = 'Jules ferry'
+            #notes = [] // Le # definie privée
+
+            // On vas construire des propriétés
+            constructor (prenom, nom) {
+              this.prenom = prenom
+              this.nom = nom
+            }
+            /* Je vais ajouter une methode de notes
+            setNotes (notes) {
+              this.notes = notes
+            } */
+
+            set notes(v) {
+                if(Array.isArray(v)) { // Permet de vérifier si une valeur est un tableau
+                    this.#notes = v
+                }
+            }
+
+            get name() {
+                return `${this.prenom} ${this.nom}` 
+            }
+
+            // J'ajoute une méthode qui nous dirait si létudiant a le droit de passé ou pas en regardant si la moyenne de l'élève est supérieur a 10
+            canPass () {
+                return moyenne(this.#notes) >= Student.moyenne
+            }
+
+            // Pour les static
+            static moyenne = 10
+            static hello() {
+                console.log('Bonjour')
+            }
+        }
+
+        class SuperStudent extends Student {
+
+            #notes = [] // Quand il est en privé et qu'on extends il faut le redefinir
+            // _notes = [] Est aussi comme le privée, il est limité à la porté de notre objet
+
+            constructor(nom, prenom, notes) {
+                super(nom, prenom)
+                this.#notes = notes
+            }
+
+            // Le mot clé super est utiliser pour appeller une methode dans le prototype superieur
+            get name () {
+                return 'Super ' + super.nom
+            }
+            canPass () {
+                return true // On vas s'imaginer qu'un super etudiant même s'il n'a pas la moyenne il passe quand même
+            }
+
+        }
+
+        const john = new SuperStudent('Bakayoko', 'Adama', 15)
+        const jane = new Student('Bakayoko', 'Abdoul')
+        // john.notes = 12
+        jane.notes = [12, 22]
+        // john.setNotes([12, 13, 15])
+        // jane.setNotes([15, 12, 18])
+        console.log(john, jane)
+        console.log(john.canPass(), jane.canPass())
+        console.log(Student.moyenne, Student.hello())
+    </script>
+
+</body>
+</html>

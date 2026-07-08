@@ -1,0 +1,15 @@
+{
+    /*
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "useBuiltIns": "usage", -- Pour charger seulement les polyfills nécessaires
+                    "corejs": 3, -- !! utiliser la version 3 de 'core-js'
+                    "targets": ">0.25%, not dead" -- !! définir les navigateurs supportés
+                }
+            ],
+            "@babel/preset-react" -- Uniquement si on fais du react
+        ]
+    */
+}

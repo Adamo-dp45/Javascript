@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentaires</title>
+    <link rel="stylesheet" href="./layout/app.css">
+    <script src="./layout/app.js"></script>
+    <script src="../src/js/comment/app.js" type="module" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="mb-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam laboriosam officiis est ipsa omnis sint error. Similique eveniet quae saepe excepturi quasi quisquam provident. Ut quia fugit impedit numquam temporibus!
+            Neque tempore nesciunt, nobis obcaecati enim laboriosam expedita, suscipit sequi quas iusto a soluta quibusdam, dolor earum repellat accusantium. Neque, aperiam voluptates molestias cupiditate assumenda officiis pariatur sequi minima consequatur.
+            Corrupti mollitia expedita inventore, consectetur incidunt ipsa tempore illo. Amet inventore aliquid reiciendis et natus placeat dolor asperiores, dolorum expedita ratione modi labore eos quas cum corrupti sed unde quos?
+            Id itaque doloremque commodi culpa nam vero magnam, temporibus facere fuga placeat assumenda minus incidunt sint ea dolore quam. Ut ducimus nisi amet. Veniam animi temporibus ut accusamus, expedita culpa.
+            Aliquid dolorem veniam, quidem at soluta fugit repellendus omnis fugiat labore facilis. Alias harum libero quisquam, qui necessitatibus ipsa, aperiam iste ratione nihil quod architecto obcaecati facilis cupiditate autem sequi.
+            Autem blanditiis suscipit nesciunt non possimus qui dolorem dicta harum doloribus, maiores, distinctio eaque animi eos ab quibusdam ratione beatae, sint aspernatur corrupti nam accusamus a facilis aliquid. Tenetur, amet.
+            Deserunt suscipit ex accusantium cumque nostrum eos ipsum incidunt et, temporibus inventore ipsam laudantium optio officiis iste perferendis in dolorum ea nobis. Obcaecati doloremque aspernatur rem maxime tempora dignissimos tenetur?
+            Beatae aut excepturi, ab blanditiis porro qui in ullam aliquid quas voluptate expedita inventore dicta at perferendis nulla itaque, quo impedit saepe quod dolor facilis. Dolor magni eos ipsam perferendis!
+            Incidunt, cupiditate! Tempore doloribus quas voluptatem quam? At, officiis beatae! Libero, officiis? Iusto possimus dolor odio quibusdam porro accusantium nisi aspernatur doloribus ipsam laudantium ea reiciendis, tempore quia dolores a!
+            Sint enim quisquam tempore, ratione aperiam expedita, in quos eaque reprehenderit, blanditiis mollitia ex fugiat accusamus sequi voluptatem nihil beatae debitis id repellat molestias. Blanditiis voluptas accusamus unde repudiandae est!
+            Impedit omnis quae aut aspernatur optio placeat voluptatibus eligendi non quam officiis qui facere pariatur fugit, mollitia maiores minus molestias magnam possimus esse atque? Perspiciatis quos fuga autem nostrum molestiae.
+            Veniam nobis reprehenderit nam adipisci vel velit, saepe quidem hic ex molestiae, expedita, dolore ut laborum dolores aliquam. Aut veniam asperiores quaerat voluptatibus officia culpa amet sapiente dolores fuga numquam!
+            Velit necessitatibus numquam earum officiis excepturi dolor repellat nam nemo atque modi, dolores assumenda esse consequuntur aut, ad rem cum quo ipsam distinctio beatae, culpa odit. Voluptates repudiandae eligendi porro?
+            Voluptate quam vitae vero facilis quos aliquid inventore explicabo natus odit laborum voluptatum molestiae nobis cumque architecto, ratione non perspiciatis maiores aliquam a ipsum totam harum cum sapiente? Rem, iste!
+            Sit distinctio dolores dignissimos, voluptatibus sunt illum voluptatem quod sint tenetur modi dolore culpa ullam eius odio enim officia dicta pariatur libero voluptates recusandae molestias ducimus est accusamus eaque. Ipsa!
+            Minus numquam facilis nam tenetur totam, inventore fuga facere voluptatibus eaque quibusdam molestias cupiditate harum explicabo provident consectetur temporibus nisi laborum quo obcaecati necessitatibus? Sed aliquid similique culpa dicta perspiciatis?
+            Dolor maxime, distinctio illum, nam consequuntur illo expedita exercitationem voluptates animi necessitatibus nobis rem corrupti ad eveniet. Dicta non mollitia eum earum itaque nam laborum iste animi corrupti, dolorem accusantium.
+            Molestiae facilis recusandae excepturi laboriosam nihil fuga velit officiis enim dolore laborum quae a nesciunt officia et quidem id ipsam odio, eligendi fugiat aspernatur sunt atque iure dignissimos consectetur? Illo?
+            Exercitationem natus ab voluptatem nulla. Facere modi consequatur, porro perspiciatis cum ad rerum reiciendis veritatis adipisci quos ut culpa esse vitae facilis repudiandae eum voluptatem, ullam debitis deserunt expedita illo!
+            Temporibus dolor qui molestias ullam voluptatibus cupiditate iusto, explicabo illo totam. Assumenda vero quidem iste corporis debitis vitae, reiciendis eum dolore cupiditate! In ratione eaque saepe maxime consectetur sed animi.
+        </div>
+
+        <template id="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="js-text">
+                    Erreur lors de l'envoi du formulaire
+                </div>
+                <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+            </div>
+        </template>
+
+        <template id="comment">
+            <article class="mb-4">
+                <div class="mb1"><strong class="js-username"></strong></div>
+                <p class="js-content"></p>
+            </article>
+        </template>
+
+        <h5 class="display-6">Tous les commentaires</h5>
+        <form 
+            action=""
+            data-endpoint="https://jsonplaceholder.typicode.com/comments"
+            data-template="#comment"
+            data-target=".comments"
+            data-elements='{"name": ".js-username", "body": ".js-content"}'
+            class="js-form-fetch mt-4"
+        >
+            <div class="row mb-2">
+                <div class="col-sm">
+                    <input type="text" name="name" class="form-control" placeholder="Votre pseudo">
+                </div>
+                <div class="col-sm">
+                    <input type="email" name="email" placeholder="Votre email" class="form-control">
+                </div>
+            </div>
+            <textarea name="body" style="min-height: 200px;" class="form-control"></textarea>
+            <button class="btn btn-primary mt-3">Envoyer</button>
+        </form>
+
+        <hr>
+        <div class="comments"></div>
+        <div
+            data-endpoint="https://jsonplaceholder.typicode.com/comments?_limit=10"
+            data-template="#comment"
+            data-target=".comments"
+            data-elements='{"name": ".js-username", "body": ".js-content"}'
+            class="text-center js-infinte-pagination mb-3">
+            <!-- 
+                Ici on lui dit le template a utiliser 
+                et la cible de notre paginnation est comments
+            -->
+            <div class="spinner-border" role="status"></div>
+        </div>
+    </div>
+</body>
+</html>

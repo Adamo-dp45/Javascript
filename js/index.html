@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js</title>
+</head>
+<body>
+
+    <script>
+        /* Variables
+         */
+        const a = "Aujord'hui\nJe suis inspiré"
+        let b = 'les gens'
+        const e = `Salut les gens
+          je suis inspiré`
+        const notes = [12, 45, 43, 'hello', [12, 11, 30]] // 'notes[2]' pour récupérer la deuxième valeur
+        const person = {
+            nom: 'john', 
+            prenom: 'adama',
+            'les gens': 12,
+            "les pers": 15,
+            [b]: 23
+        } /*
+            - 'person.nom' !! le nom
+            - '[b]' !! écrire une clé basé sur une variable, 'b' en haut
+        */
+        const isMajeur = null // La valeur est null
+        const rien = undefined // !! indiquer qu'une variable n'est pas définie
+        'chaine'.length // !! avoir la taille de ma chaine
+        const isType = typeof e // 'typeof' !! le type d'une variable
+
+
+        /* Conditions
+         */
+        const age = 18
+        const pays = 'FR'
+        if(pays === 'FR' && age >= 18) {
+            console.log('Vous avez le droit de conduire')
+        } else if(pays !== 'FR') {
+            console.log('Vous n\'êtes pas en france')
+        } else {
+            console.log('Vous n\'avez pas le droit de conduire')
+        } /*
+            - La différence entre '==' et '===' est que '==' vérifie que les 2 sont équivalente or '===' !! sont identiques en plus le type
+                - '4 == '4'' true
+                - '4 === '4'' false
+        */
+        if(!pays === 'FR') {
+            console.log('Vous ne pouvez pas conduire')
+        }
+
+        switch (pays) {
+          case 'FR':
+            console.log('Je suis en france')
+            break
+            case 'US':
+            console.log('Je suis au USA')
+            break
+          default: 
+            console.log('Je suis dans un pays inconnu')
+            break
+        }
+
+        if((pays === 'FR' && age >= 18) || (pays === 'US' && age >= 15)) {
+            console.log('Tu as le droit')
+        }
+
+        if(age == 18) {
+            console.log('Vous êtes majeur')
+        }
+
+        if(age === 18) {
+            console.log('Vous avez 18 ans')
+        }
+
+        if(age !== 19) {
+            console.log('Vous êtes mineur')
+        }
+
+        /* Ex
+         */
+        const year = 2024
+        const birthyear = prompt('Quelle est votre année de naissance ?')
+        const droit = year - birthyear
+        if(droit <= 13) {
+            console.log('lilo et switch')
+        } else if(droit < 18) {
+            console.log('matrix')
+        } else {
+            console.log('Evil mar cry')
+        }
+
+        const r = prompt('Entrer un premier nombre')
+        const t = prompt('Entrer un second nombre')
+        const result = r + t
+
+        if(isNaN(result)) { /*
+            - 'isNaN' !! verifier si 'result' n'est pas un nombre
+        */
+            console.log('Opération impossible')
+        } else {
+            if(result > 0) {
+                console.log(`${r} x ${t} = ${result} est positif`)
+            } else {
+                console.log('Négatif')
+            }
+        }
+
+        /* La portée des variables
+         */
+        let ans = 18
+        if(ans === 18) {
+            ans *= 2
+            let suffix = 0
+        } /*
+            - 'console.log(suffix)' ne fonctionne pas vu qu'une variable est déclaré pour le bloc courant
+        */
+        console.log(ans)
+
+
+        /* Les boucles
+         */
+        let i = 0
+        while(i < 10) { /*
+            - La boucle tant que
+        */
+            console.log('Bonjour' + i)
+            i = i + 1
+        }
+        for(let z = 0; z < 5; z = z +1) { /*
+            - !! pour
+        */
+            console.log('salut' + z)
+        }
+
+        let tableau = [12, 13 , 15, 16]
+        for(let d = 0; d < tableau.length; d++) { /*
+            - 'length' pour déterminer la taille du tableau
+        */
+            console.log('Valeur : ', d)
+        }
+
+        const table = [12, 13 , 15, 16]
+        const pers = {
+            nom: 'Adam',
+            pern: 'dos'
+        }
+        const gree = 'Bonjour'
+
+        for(let note of table) { /*
+            - 'of' si on ne veut que la valeur des notes et ne marche que sur les tableau '[]'
+        */
+            console.log(table)
+        }
+        for(let i in pers) { /*
+            -  'in' pour avoir la clé et la valeur, marche en plus sur sur les tableau associatifs '{}'
+        */
+            console.log(pers[i])
+        }
+        for(later of gree) { 
+            console.log(later) /*
+                - On aura chaque lettre contenu dans le mot, 'in' donne l'index de la lettre
+            */
+        }
+
+        let guess = 8
+        let chiffre
+        while(chiffre !== guess) {
+            chiffre = prompt('Votre chiffre :') * 1 // '* 1' !! avoir la note en nombre
+            if(chiffre < guess) {
+                console.log('Plus')
+            } else if(chiffre > guess) {
+                console.log('Moin')
+            }
+        }
+        console.log('Bravo ! Vous avez devinez')
+        /* Ou..
+        */
+        while(true) {
+            chiffre = prompt('Votre chiffre :') * 1
+            if(chiffre < guess) {
+                console.log('Plus')
+            } else if(chiffre > guess) {
+                console.log('Moin')
+            } else {
+                break // 'break' !! sortir de la boucle
+            }
+        }
+        console.log('Bravo ! Vous avez devinez')
+
+
+        /* Les fonctions
+         */
+        /*
+            - Si on utilise le mot clé 'function' on peut utiliser la fonction avant qu'elle soit definie 'CanDrive(19, 'FR')'
+            - On.. ecrire 'const CanDrive = function (age, pays)', mais il faut definir la fonction avant de l'utiliser
+        */
+
+        /**
+         * Permet de savoir si l'utilisateur peut conduire
+         * @param {number} age
+         * @param {string} pays Code de pays sur 2 caractères
+         * @return {boolean}
+         */
+        function CanDrive (age, pays) {
+            if(
+                (age >= 18 && pays === 'FR') ||
+                (age >= 16 && pays === 'US')
+            ) {
+              return true
+            }
+            return false
+        }
+        console.log(CanDrive(19, 'FR'))
+
+        function greeting(name) {
+            console.log(`Bonjour ${name}`) /*
+                - Une fonction n'est pas obligé de retourner une valeur
+            */
+        }
+        console.log(greeting('adama'))
+
+        let notes2 = [12, 13 ,14];
+        function upNotes(n) {
+            n[0]++
+        }
+        upNotes(notes2) /*
+            - Dans.. d'un tableau la valeur de la variable sera modifié même si on utilise un 'const' a la place de 'let'
+        */
+        console.log(notes2)
+
+        const aa = {
+            prenom: 'John',
+            nom: 'Doe',
+            fullname: function() {
+                console.log(`${this.nom} ${this.prenom}`) /*
+                    - 'this' fait reférence a un objet globale disponible au niveau de la page, dans une fonction fléchéé '() =>' le contexte de 'this' n'est pas altéré
+                */
+            }
+        }
+        aa.fullname()
+        console.log('Hello'.toUpperCase())
+
+        const somme = (a, b) => {
+            return a + b
+        }
+        // Ou.. 'const som = (a, b) => a + b' quand on n'a un seule retour
+        console.log(somme(1, 2))
+        console.log(som(10, 2))
+
+        const isPair = (a, cb) => {
+            if(a % 2 === 0) {
+                cb(a)
+            }
+        }
+        isPair(4, function (n) {
+            console.log('Votre chiffre est pair ' + n)
+        })
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * (max + 1))
+        }
+        const solution = getRandomInt(10)
+        console.log(solution)
+
+        function isRight(n) {
+            return solution == n
+        }
+
+        function guess() {
+            const number = prompt('Entrer un chiffre')
+            return isRight(number)
+        }
+
+        for(i = 0; i < 3; i++) {
+            if(guess()) {
+                console.log('Bravo')
+                break
+            } else {
+                console.log('Vous avez perdu')
+            }
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
+</head>
+<body>
+
+    <input type="text" name="" id="">
+    <button id="icrement">Incrémenter</button>
+    <button id="decrement">Décrémenter</button>
+    <button id="reset">Réinitialiser</button>
+
+    <script>
+        // -- Les proxy permettent de décorer un objet et change aussi l'objet, mais ne change pas le instanceof des objets - Décore un objet existant pour pouvoir intercepter les accès et écritures au niveau des propriétés de cet objet
+
+        const input = document.querySelector('input')
+        const state = new Proxy({
+            count: 0
+        }, {
+            set(target, prop, value) {
+                if(prop === 'count') {
+                    input.value = value
+                }
+                return Reflect.set(...arguments)
+            }
+        })
+
+        document.getElementById('icrement').addEventListener('click', () => {
+            state.count++
+        })
+        document.getElementById('decrement').addEventListener('click', () => {
+            state.count--
+        })
+        document.getElementById('reset').addEventListener('click', () => {
+            state.count = 0
+        })
+
+        input.value = 0
+
+        // ----- //
+        const a = {
+            b: 3
+        }
+        const p = new Proxy(a, {
+            get(target, prop, receiver) { // Permet d'attraper les accès à une propriété, target - Cible, prop - Nom de la propriété, receiver - Le proxy
+                console.log('Accès à une propriété '+ prop)
+                return target[prop] // Reflect.get(target, prop) | (...arguments) : On aura 3 mais on a la possibilité de faire des traitements avant de rendre le résultat
+            },
+            set(target, prop, value, receiver) { // Permet de capturer les assignements
+                console.log('Ecriture dans la propriété', prop, value)
+                return Reflect.set(...arguments)
+            }
+        })
+        p.b = 2
+        console.log(a)
+
+        // --- Ex --- //
+        const john = {
+            name: 'John Doe',
+            age: 25
+        }
+
+        function updateUser(person) {
+            person.age = 29 // 29 passe, 11 ne passe pas, 155 ne passe pas
+        }
+
+        const majeurProxyHandler = {
+            set(target, prop, value, receiver) {
+                if(prop === 'age' && value < 18) {
+                    throw new Error('La personne ne peut pas devenir mineure')
+                }
+                return Reflect.set(...arguments)
+            }
+        }
+
+        const aliveProxyHandler = {
+            set(target, prop, value, receiver) {
+                if(prop === 'age' && value > 150) {
+                    throw new Error('La personne est trop vielle')
+                }
+                return Reflect.set(...arguments)
+            }
+        }
+        const johnMajeur = new Proxy(new Proxy(john, majeurProxyHandler), aliveProxyHandler)
+        updateUser(johnMajeur)
+
+        // ---
+        const distribution = objWithDefault({}, 0)
+        function objWithDefault(obj, initial) {
+            return new Proxy(obj, {
+                get(target, prop) {
+                    if(!(prop in target)) {
+                        Reflect.set(target, prop, initial) // Ajoute la valeur initial à la propriété de l'objet
+                    }
+                    return Reflect.get(...arguments)
+                }
+            })
+        }
+        distribution['John']++
+        distribution['John']++
+        distribution['John']++
+        distribution['Jane']++
+
+        console.log(distribution)
+
+        const distribution2 = objWithDefault({}, [])
+        function objWithDefault(obj, initial) {
+            return new Proxy(obj, {
+                get(target, prop) {
+                    if(!(prop in target)) {
+                        Reflect.set(target, prop, structuredClone(initial)) // structuredClone sinon John et Jane auront le même tableau
+                    }
+                    return Reflect.get(...arguments)
+                }
+            })
+        }
+        distribution2['John'].push('a')
+        distribution2['John'].push('b')
+        distribution2['Jane'].push('c')
+
+        console.log(distribution2)
+
+        // ----- //
+        class Person {}
+        const personClass = new Proxy(new Person(), {
+            get() {}
+        })
+        console.log(personClass instanceof Person) // Nous donne la même instance car le proxy ne change pas le 'instanceof'
+
+        // ----- //
+        const h = {
+            hello() {
+                console.log(this)
+            }
+        }
+        const d = new Proxy(h, {
+            get(target, prop) {
+                if(typeof target[prop] === 'function') {
+                    return Reflect.get(...arguments).bind(target) // On veut que this face reférence à notre objet original 'a' et non au proxy
+                }
+                return Reflect.get(...arguments)
+            }
+        })
+        console.log(d.hello())
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpinejs</title>
+    <link rel="stylesheet" href="./build/app.css">
+    <script src="./build/alpine.js" defer type="module"></script>
+</head>
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
+<body>
+
+    <!--
+        - x-data : Un objet qui va représenter tous notre état
+        - x-show : Permet de cacher un élément
+        - x-if : !! de rendre l'élément invisible dans le DOM mais on l'utilise sur un 'template'
+        - x-for : !! de faire une boucle
+        - x-bind:class ou :class : !! de modifier le comportement d'un attribut
+        - x-text : !! d'écrire un texte
+
+        - Le store permet de conserver les données
+        - On peut créer des attributs personnalisés
+
+        - Pour la sécurité on n'a le CSP 'Content Security Policy' vu que le problème avec alpine exécute du javascript à l'intérieur de notre code mais le fais avec son propre système, ce qui peut poser des problème pour des données sensibles donc il y'a ce build séparé pour ça 
+    -->
+
+    <div class="container mt-5 mb-3" x-data="{showSpoiler: false}">
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. In voluptates recusandae nemo suscipit illum. Necessitatibus blanditiis tempore accusamus sint ea quidem. Mollitia tenetur expedita odit itaque quasi, cupiditate molestiae eos.
+        </p>
+        <p x-show="!showSpoiler">
+            <button
+                x-on:click="showSpoiler = true"
+                class="btn btn-primary"
+            > <!--
+                - On peut écire le 'x-on:click' en '@click'
+            -->
+                Afficher le spoiler
+            </button>
+        </p>
+        <p
+            x-show="showSpoiler"
+            x-cloak
+            x-transition.opacity
+        > <!--
+            - 'x-cloak' pour éviter que l'élément soit visible avant que alpine soit chargé
+            - 'x-transition' pour avoir un effet de transition
+                - '.opacity' pour l'avoir que sur l'opacité et pour personaliser plus voir la documentation
+                - '.duration.500ms' pour la durée
+            - 'x-transition:enter.duration.500ms' pour l'animation d'entrée
+            - 'x-transition:leave.duration.1000ms'
+        -->
+            <strong>Spoiler</strong>
+        </p>
+
+        <template x-if="showSpoiler">
+            <p><strong>Spoiler if</strong></p>
+        </template>
+        <template x-if="!showSpoiler"> <!-- L'inconvenient est qu'au chargement initial de la page l'élément prend un petit temps à apparaître car il doit charger le javascript -->
+            <p><strong>Spoiler if false</strong></p>
+        </template>
+
+        <!--
+            Dans des situations le faite de mettre la logique dans le html peut être un peu complexe donc peut être instérèssant d'ajouter du code javascript
+        -->
+        <div x-data="tabs('tab1')"> <!-- On utilise le x-data qu'on a enregistrer dans le js et dans ce composant on a accès à 'tabs' -->
+            <ul class="nav nav-pills nav-fill"> nav-tabs
+                <!-- <p x-text="tab"></p> -->
+                <li class="nav-item">
+                    <a 
+                        href="#tab1"
+                        class="nav-link"
+                        @click="toggleTab"
+                        x-active-page="isActive('tab1')"
+                        aria-current="page"
+                    >Onglet 1</a> <!-- x-bind:class="{active: isActive('tab1')}"
+                        - x-active-page : Un attribut personnalisé
+                    -->
+                </li>
+                <li class="nav-item">
+                    <a 
+                        href="#tab2"
+                        class="nav-link"
+                        @click="toggleTab"
+                        x-bind:class="{active: isActive('tab2')}"
+                    >Onglet 2</a>
+                </li>
+            </ul>
+            <div class="mt-2">
+                <template x-if="isActive('tab1')">
+                    <div>
+                        <h1>Onglet 1</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, reprehenderit? Hic, exercitationem doloribus rerum fuga voluptatem facere dicta fugit suscipit porro. Recusandae voluptate reprehenderit voluptatum minus corrupti eos incidunt a!
+                        </p>
+                        <p>
+                            <a href="#tab2" @click="toggleTab">Aller à l'onglet 2</a>
+                        </p>
+
+                        <div x-data="{}"> <!-- On peut utiliser un 'x-data' imbriqué sans soucis
+                            - L'inconvenient est que si on vas sur un autre onglet on perdra les informations vu qu'on n'est dans template il va récrée l'élément et réappelé 'posts()' donc pour ça on n'a le store donc on n'a changer 'posts()' par '{}' car on vas utiliser le store
+                        -->
+                            <p x-show="!$store.posts.loaded">
+                                <button 
+                                    class="btn btn-primary"
+                                    :disabled="$store.posts.loading"
+                                    @click="$store.posts.loadPosts()"
+                                >Charger les articles</button>
+                            </p> <!-- 'loadPosts()' pour péciser qu'on appelle la fonction à cause du store -->
+                            <div class="spinner-border" x-show="$store.posts.loading"></div>
+                            <template x-for="post in $store.posts.posts" :key="post.id">
+                                <article class="card p-2 m-2">
+                                    <h3 x-text="post.title"></h3>
+                                    <p x-text="post.body"></p>
+                                </article>
+                            </template>
+                        </div>
+
+                    </div>
+                </template>
+                <template x-if="isActive('tab2')">
+                    <div>
+                        <h1>Onglet 2</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, reprehenderit? Hic, exercitationem doloribus rerum fuga voluptatem facere dicta fugit suscipit porro. Recusandae voluptate reprehenderit voluptatum minus corrupti eos incidunt a!
+                        </p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-4">
+        <div class="mb-2" x-data="{ count: 0 }">
+            <button class="btn btn-primary" x-on:click="count++">Incrémenté</button>
+            <button class="btn btn-secondary" x-on:click="count--">Décrémenté</button>
+            <span x-text="count"></span>
+        </div>
+
+        <div class="mb-2" x-data="{ open: false }">
+            <button class="btn btn-warning" @click="open = ! open">Toggle</button>
+            <div x-show="open" @click.outside="open = false">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde illum alias facilis odit ea tenetur animi labore eveniet ab maiores! Voluptatum molestiae ipsa quod incidunt, magnam non? Quod, fugiat reprehenderit?
+            </div>
+        </div>
+
+        <div
+            x-data="{
+                search: '',
+                items: ['foo', 'bar', 'baz'],
+                get filteredItems() {
+                    return this.items.filter(
+                        i => i.startsWith(this.search)
+                    )
+                }
+            }"
+            class="mb-2"
+        >
+            <input class="form-control mb-2" x-model="search" placeholder="Rechercher...">
+            <ul>
+                <template x-for="item in filteredItems" :key="item">
+                    <li x-text="item"></li>
+                </template>
+            </ul>
+        </div>
+
+        <!--
+            - Pour surveiller une propriété de composant on n'a '$watchméthode'
+        -->
+        <div x-data="{ open: false }" x-init="$watch('open', (value, oldValue) => console.log(value, oldValue))">
+            <button class="btn btn-secondary" @click="open = ! open">Toggle watch</button>
+        </div>
+    </div>
+
+</body>
+</html>

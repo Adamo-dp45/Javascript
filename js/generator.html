@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generateur</title>
+</head>
+<body>
+
+    <script>
+        // Les générateurs sont des fonctions qui sont capable de mettre en pause leur exécution et sur lesquelles il sera possible d'ittérer
+
+        function* animals() {
+            console.log('animals')
+            yield 'Chien'
+            yield 'Chat'
+            yield 'Pantère'
+        }
+
+        const gen = animals()
+        // console.log(gen.next()) -- Nous donne le premier animal de la liste - Donne un objet avec la valeur avec une propriété 'done: false' qui permet d'indiquer si on n'est à la fin de cette fonction
+        // console.log(gen.next()) -- Deuxième valeur
+
+        for(const animal of gen) {
+            console.log(animal)
+        }
+        // console.log(Array.from(gen)) -- Me donne un tableau qui contient mes éléments
+
+        function* insects() {
+            try {
+                yield 'Moustique'
+                yield* animals() // Pour utiliser un générateur dans un autre
+            } finally {
+                console.log('cleanup') // Ce code sera exécuter avant le code du return
+            }
+        }
+
+        const gene = insects()
+        console.log(gene.next())
+        console.log(gene.next())
+        console.log(gene.return()) // Dans ce cas à partir deuxième élément notre élément a fini de s'éxécuter et on obtiendra des valeurs qui sont undifined avec un done a true - On a aussi la possiblité d'éxécuter du code dans le générateur malgré le return - try - finally : Va exécuter du code lorsqu'il y'aura un return dans la partie du try7
+        console.log(gene.next())
+        // console.log(gene.throw()) -- Permet de remplaçer le yield par un throw, dans ce cas il faut avoir un catch(e) dans le générateur pour capturer l'erreur - Dans le throw(new Error('')) on peut lui passer un message d'erreur et dans le générateur e.toString()
+
+        // --- Ex --- //
+        // -- Fonction qui va pouvoir lire des lignes avec la possibilité de s'arrêté
+        function* readLine(s) {
+            if(!s) return
+            let currentPosition = 0
+            let nextNewLive = s.indexOf('\n')
+            while(currentPosition < s.length) {
+                if(nextNewLive === -1) {
+                    yield s.slice(currentPosition).trim()
+                    break
+                }
+                yield s.slice(currentPosition, nextNewLive).trim()
+                currentPosition = nextNewLive + 1
+                nextNewLive = s.indexOf('\n', currentPosition)
+            }
+        }
+
+        const gens = readLine(`a
+            b
+            c
+            d
+        `)
+        console.log(gens.next())
+        console.log(gens.next())
+
+        // On peut créer un tableu infini qui renvoi une valeur, ne bloquer pas pour autant l'éxécution du code car à chaque il va s'arrêté au moment du yield par contre ne pas utiliser de Array.from() la dessus sinon il va créer une boucle infini
+        function* isMaker() {
+            let i = 0
+            while(true) {
+                i += (yield i) ?? 1
+            }
+        }
+        const igen = isMaker()
+        console.log(igen.next().value)
+        console.log(igen.next(10).value) // On peut lui passer une valeur, ici il commençera à partir de 10
+        console.log(igen.next().value)
+
+        // Async générator - On peut l'utiliser pour récupérer les utilisateurs les uns derrière les autres
+        async function* fetchUsers() {
+            let page = 0
+            while(true) {
+                yield await fetch('https://' + 10 * page).then((r) => r.json())
+                page++
+            }
+        }
+        const agen = fetchUsers()
+        // console.log((await agen.next()).value)
+        // console.log((await agen.next()).value) -- Ou
+        // for await (const user of agen) {
+        //    console.log(user)
+        // } 
+    </script>
+
+</body>
+</html>

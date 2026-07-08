@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immer</title>
+</head>
+<body>
+
+    <script type="module">
+        // Permet d'appliquer des transformation sur un tabelau sans modifier le tableau original, par defaut le js fais une mutation (modifie l'original) - Doc
+
+        const items = [1, 2, 3, 4]
+        const sorted = [...items].sort() // Ici on ne vas pas modifier le tableau original
+        console.log(
+            items,
+            sorted
+        )
+
+        // --- Immer --- //
+        import {produce, immerable, original, current} from "immer"
+
+        // 'produce' prend en paramètre l'état qu'on veut modifier et en deuxième params une fonction qui fera une mutation et il utilise un système de 'curry'
+        // 'original' permet de recupérer l'objet original par rapport a un élément au lieu d'un proxy
+        // 'current' permet de recupérer la valeur courante une fois que l'objet a été modifié
+
+        const itemsImmutable = [1, 2, 3, 4]
+        produce(state, function(darft) {}) // 'darft' version modifier de notre objet sur lequel on pourra faire des mutations
+        produce(itemsImmutable, draft => draft.sort()) // Ne vas pas modifier le tableau original
+        // Dans la fonction, soite faire une modification et ne rien retourner ou l'inverse
+        produce(itemsImmutable, (draft) => void (draft = !draft)) // Pour utiliser la fonction flèché pour une modification, on doit préciser qu'il ne retourne rien
+
+        // Si on return quelque chose dans la function 'produce' ce retour sera renvoyer comme résultat et il faut faire attention au fonction flèché aussi
+        console.log(
+            produce(function(draft, index) {
+            })(state) // On peut l'utiliser comme une fonction curry
+        )
+        const todoCurry = produce(function(draft, index) {})
+        const todoCur = todoCurry(state, 1)
+
+        class Todo {
+
+            // [immerable] = true - Ou, fonctionne avec les navigateurs qui comprennent les class properties
+
+            constructor(title, completed) {
+                this[immerable] = true // Pour que immer soit capable de le proxy
+                this.title = title
+                this.completed = completed
+            }
+
+            toggle() {
+                this.completed = !this.completed
+            }
+        }
+        // Todo[immerable] = true - Ou
+
+        const todos =[
+            new Todo('titre 1'),
+            new Todo('titre 2')
+        ]
+        const newTodos = produce(todos, function(draft) {
+            draft[0].toggle()
+        })
+        console.log(todos, newTodos) // L'original sera modifié car par défaut les objets personalisés ne sont pas transformer par immer et ne sera pas en mésure d'utiliser un proxy pour eux, donc il faut lui indiquer que Todo peut être proxyfié
+    </script>
+
+</body>
+</html>

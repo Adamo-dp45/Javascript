@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+<body>
+
+    <!--
+        'API Temporal' : Nouvelle Api à venir
+    -->
+
+    <script>
+        function addDays(date, days) {
+            let newDate = new Date(date.getTime())
+            newDate.setDate(newDate.getDate() + days)
+            return newDate
+        }
+
+        const today = new Date()
+        const tomorrow = addDays(today, 1) // Ajoutera 1 jour sur la date
+        console.log(today) // Ici ne sera pas modifié car dans la function j'ai utiliser newDate
+        console.log(tomorrow)
+
+        console.log(
+            new Date().getTime() + '\n', // Timestamp de la date
+            new Date().getDate() + '\n', // Numéro de la date
+            new Date().toISOString() + '\n', // Date au format ISO
+            new Date().toUTCString() + '\n', // Date au format UTC
+            new Date().toLocaleString() + '\n', // Nous donne la date et le temps
+            new Date().toLocaleDateString('en-US') + '\n', // Nous format seulement la partie date avec le local de l'utilisateur, peut avoir en paramètre une local
+            new Date().toLocaleTimeString() + '\n', // Nous donne le temps
+
+            new Date().toLocaleString(undefined, {dateStyle: "long"}), // 09 aout 2025
+            new Date().toLocaleString(undefined, {dateStyle: "long", timeStyle: "long"}), // 09 aout 2025 à 18:42:50 UTC+2
+            new Date().toLocaleString(undefined, {dateStyle: "medium", timeStyle: "long"}), // 09 oct. 2025, 18:42:50 UTC+2
+        )
+
+        const MONTHS = 'months'
+        const DAYS = 'days'
+        const YEARS = 'years'
+
+        const NMOUNTS = 1
+
+        function addInterval(date, n, unit) {
+            let newDate = new Date(date.getTime())
+            switch(unit) {
+                case DAYS:
+                    newDate.setDate(newDate.getDate() + n)
+                    break
+                case MONTHS:
+                    newDate.setMonth(newDate.getMonth() + n)
+                    break
+                case YEARS:
+                    newDate.setFullYear(newDate.getFullYear() + n)
+                    break
+            }
+            return newDate
+
+            /* Ou --
+                const parts = [
+                    date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate(),
+                    date.getHours(),
+                    date.getMinutes(),
+                    date.getSeconds(),
+                    date.getMilliseconds(),
+                ]
+                parts[unit] += n
+                return new Date(...parts)
+            */
+        }
+        const date = new Date()
+        const future = addInterval(date, 3, MONTHS) // On va ajouter 3 mois à notre date
+        // const future2 = addInterval(date, 3, NMOUNTS) // On va ajouter 3 mois à notre date
+        console.log(future)
+    </script>
+
+</body>
+</html>

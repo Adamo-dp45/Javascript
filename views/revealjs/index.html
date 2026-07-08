@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal js</title>
+    <link rel="stylesheet" href="../build/reveal.css">
+    <script src="../build/reveal.js" defer></script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-auto-animate data-background-color="#CCC"> <!-- data-background-image : Pour une image -->
+                <h2>Slide <strong>1</strong></h2>
+                <ul>
+                    <li class="fragment">argument 1</li> <!-- 'fragment' permet de spécifier que l'élément ne s'affiche pas par défaut mais que si on appuie sur la flèche suivante -->
+                    <li class="fragment">argument 2</li>
+                    <li class="fragment">argument 3</li>
+                </ul>
+                <aside class="notes"> <!-- 'notes' ne sera pas affiché dans la présentation, mais utile si on a activer la 'Spiker view', on pourra voir cette note -->
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, obcaecati perferendis. Accusantium natus voluptates repellendus temporibus itaque necessitatibus ducimus, optio recusandae iusto sit! Tempore excepturi sit cumque, voluptatibus labore magni!
+                </aside>
+            </section>
+            <section data-auto-animate data-markdown> <!-- 'data-markdown' pour utiliser du markdown -->
+                <textarea data-template>
+                    ## Slide markdown
+                    Un petit paragraphe [lien](https://google.com)
+
+                    ```js [1, 2|3|4]
+                    let a = 5
+                    let b = 4
+                    let c = 4
+                    let b = 4
+                    ```
+                </textarea> <!-- [1, 2] ligne à affiché en surveillance, |3|4 slide suivant -->
+            </section>
+            <section data-transition="zoom"> <!-- 'data-transition' pour changer l'animation -->
+                <section>
+                    <h2>Slide 2.0</h2>
+                    <pre>
+                        <code data-line-numbers="1-2|3-4|5-6">
+                            <table>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Titre</th>
+                                </tr>
+                                <tr>
+                                    <td>Colonne</td>
+                                    <td>Colonne</td>
+                                </tr>
+                            </table>
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Slide 2.1</h2>
+                </section>
+            </section>
+            <section data-auto-animate> <!-- 'data-auto-animate' pour avoir une animation automatique -->
+                <h2 style="color: red;">Slide 3</h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate, accusantium tenetur. Incidunt, facilis! Obcaecati quas iste ex pariatur, fugit amet laborum quo? Ratione ex odio sunt amet consequatur nulla ipsum.
+                </p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

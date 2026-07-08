@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Pratique</title>
+</head>
+<body>
+
+    <script>
+        class Book {
+
+            #page = 1
+
+            constructor(title, pages) {
+                this.title = title
+                this.pages = pages
+            }
+
+            get page() {
+                return this.#page
+            }
+
+            nextPage() {
+                if(this.#page < this.pages) {
+                    this.#page++
+                }
+            }
+
+            close() {
+                this.#page = 1
+            }
+        }
+
+        class Library {
+
+            #books = []
+
+            addBook(livre) {
+                this.#books.push(livre)
+            }
+
+            addBooks(books) {
+                // books.forEach(book => this.addBook(book)) -- Ou utiliser cette fonction
+                // books.forEach(this.addBook, this) -- Ou le faire de cette manière
+                for(let book of books) {
+                    this.addBook(book)
+                }
+            }
+
+            findBookByLetter(letter) {
+                /*
+                const found = []
+                for(let book of this.#books) {
+                    if(book.title[0].toLowerCase() === letter.toLowerCase()) {
+                        found.push(book)
+                    }
+                }
+                return found
+                */
+                // Ou utiliser filter
+                return this.#books.filter((book) => book.title[0].toLowerCase() === letter.toLowerCase())
+            }
+        }
+
+        const b = new Book('Seigneur du ceil et de la terre', 20)
+        console.log(b.page)
+        b.nextPage()
+        console.log(b.page)
+        b.close()
+        console.log(b.page)
+
+        const l = new Library()
+        l.addBook(b)
+        l.addBooks([
+            new Book('Ready player one', 100),
+            new Book('Oui-Oui', 10),
+            new Book('Sillage', 50)
+        ])
+        console.log(l.findBookByLetter('S'))
+    </script>
+
+    <script>
+        class Rectangle {
+
+            constructor (width, height) {
+                if(width <= 0 || height <= 0) {
+                    throw new Error('Impossible d\'avoir une forme géométrique avec des dimensions négative', {cause: {code: 404, url: 'http://'} }) // On peut ajouter des infos suplémentaire à l'objet Error de cette manière
+                }
+                this.width = width
+                this.height = height
+            }
+
+            get perimeter () { // Deux fois la largeur + Deux fois la hauteur
+                return this.width * 2 + this.height * 2
+            }
+
+            get isValid() { // Permet de verifier si notre forme géométrique est valide et renvoi un booleen car la dimension ne peut pas être négative
+                return this.width > 0 && this.height > 0
+            }
+
+            isBiggerThan(shape) {
+                // Il sera sur les deux class et permettra de vérifié si la forme est plus grande ou plus petite, pour cela on
+                // Vas camparer les périmètre
+                return this.perimeter > shape.perimeter
+            }
+
+        }
+
+        class Square extends Rectangle { // Permet de représenter un carré, il doit avoir la même largeur et la même hauteur
+
+            constructor(width) {
+                super(width, height)
+            }
+        }
+
+        try {
+            const r = new Rectangle(10, 20)
+            console.log(r.perimeter)
+            console.log(r.isValid)
+            const r2 = new Rectangle(-10, 20)
+            console.log(r2.isValid)
+            const c = new Square(10)
+            console.log(c.perimeter)
+            console.log(c.isBiggerThan(r))
+        } catch(e) {
+            console.log(e.message)
+        }
+
+        try {
+            const width = parseInt(prompt('Entrer une largeur: '), 10) // Fonction permettant de mettre en entier la valeur avec une base 10
+            const height = parseInt(prompt('Entrer une hauteur: '), 10)
+            const rec = new Rectangle(width, height)
+            console.log(rec.perimeter) // Pas trop nécessaire car j'ai mis l'erreur dans le constructeur
+        } catch(e) {
+            console.log('Impossible de construire le rectangle')
+        }
+
+
+        // Error and Exception
+        class PromptError extends Error {
+        }
+
+        function promptRectangle() {
+            try {
+                const width = parseInt(prompt('Entrer une largeur fonction: '), 10)
+                const height = parseInt(prompt('Entrer une hauteur fonction: '), 10)
+                const rec = new Rectangle(width, height)
+                return rec
+            } catch(e) {
+                throw new PromptError('Entrer utilisateur invalide')
+            }
+        }
+
+        try {
+            promptRectangle()
+        } catch(e) {
+            if(e instanceof PromptError) {
+                console.log('PromptError')
+            } else {
+                console.log("Erreur classique")
+            }
+        }
+    </script>
+
+</body>
+</html>

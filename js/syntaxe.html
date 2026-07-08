@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucre Syntaxique</title>
+</head>
+<body>
+
+    <script>
+        let i = 0
+        i = i + 1
+        i++ // récupérer la valeur de l'incrémentation
+        ++i // Avoir la valeur après l'incrémentation
+        i += 3 // Fera l'addition
+        i *= 3 // Multiplie
+        i /= 3 // Diviser
+
+        const double = n => n + 2 // Si une fonction flèché n'a qu'un seule paramètre on peut enlever les parenthèses
+        console.log(double(4))
+
+        const a = 3
+        const b = a || b // Si a est false ou 0 il prend la valeur b, on peut aussi utiliser ??, mais pour lui l'autre doit être null ou undifined
+        a ??= 5 // Si la valeur est null il prendra 5, Aussi ||=
+
+        const person = {firstname: 'John'}
+        person.job?.name // Au lieu d'un if
+        person?.age?.toString()
+
+        const [premiereNote, SecondNote, ...autreNotes] = [12, 20, 9] // Ici il donne la première valeur a premeireNote et ...
+        const {nom: premierNom, ...rest} = { // Ou {nom, prenom, ...autreValeur}
+            nom: 'Adama',
+            prenom: 'Bakkk'
+        }
+        console.log(premierNom, rest) // Je n'extrais que le nom, rest les autres
+
+        function canDrive({nom, age, region = "Abidjan"}) { // Aussi function pow(nom = "add") {}
+            return true
+        }
+        console.log(canDrive({nom: 'adama', age: 22}))
+
+        const notes = [11, 2]
+        const notesO = {name: 'John'}
+        console.log([...notes, 7]) // Créer un nouveau tableau sans modifier le premier
+        console.log([...notes].reverse())
+        console.log({...notes, age: 7}) // Nouvelle objet sans modifier l'original
+
+        // Tainaire
+        const age = 18
+        const message = age >= 18 ? 'Majeur' : 'Mineur'
+        console.log(message)
+    </script>
+
+</body>
+</html>

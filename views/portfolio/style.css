@@ -1,0 +1,87 @@
+body {
+    color: #5a5a5a;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1000px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.portfolio {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-auto-flow: row dense; /* Lorsqu'on affichera le body, les éléments suivant ne seront pas déplacer à la ligne suivante mais s'il y'a de l'espace il seront avant le body - Rempli chaque ligne de manière dence */
+    counter-reset: portfolio; /* Pour m'assurer que mes éléments soit bien à leurs places */
+}
+
+.project {
+    counter-increment: portfolio;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+}
+
+h2 {
+    padding: 0;
+    margin: 0 0 5px;
+    color: #000;
+}
+
+.project-name::after {
+    content: counter(portfolio);
+}
+
+.project-body { /* Pour avoir une animation plus propre */
+    overflow: hidden;
+}
+
+.project .project-body {
+    display: none;
+}
+
+@media screen and (min-width: 640px) {
+    .portfolio {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* --- */
+    .project-body {
+        grid-column: span 4; /* Prend 4 colones et pour ne pas qu'il déplace les autres à la ligne suivante on a utilisé 'grid-auto-flow' */
+    }
+}
+
+/* --- Flex --- */
+.project {
+    width: 100%;
+}
+
+.portfolio-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 640px) {
+    .portfolio-flex {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .portfolio-flex .project {
+        width: 25%;
+        padding: 10px; /* Histoire qu'on n'est au total 20 au niveau des goutières */
+    }
+
+    .portfolio-flex .project-body {
+        padding: 0 10px;
+    }
+}
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonction</title>
+</head>
+<body>
+    <script>
+        // Pratique fonction
+        function isPalindrome(word) {
+            const letters = word.split('').reverse() // reverse : Inverse un tableau, split : Prend un patern et divise la chaîne en utilisant ce patern
+            const reversedWord = letters.join('') // join : Permet de rejoindre les mots ensemble
+            return word.toUpperCase() === reversedWord.toUpperCase()
+        }
+
+        const words = {
+            kayak: true,
+            SOS: true,
+            Kayak: true,
+            Bonjour: false
+        }
+
+        for(let word in words) {
+            if(isPalindrome(word) !== words[word]) {
+                console.error(`isPalindrome(${word}) aurait dû renvoyer true`)
+            }
+        }
+
+        /*
+            On a un tableau d'élèves et notre objectif est de calculer la moyenne de chacun de ces élèves, Donc on aimerais transformer l'objet "students"
+            Pour ajouter une propriété moyenne a chacun de ces élèves qui contiendrais la moyenne des notes, Dans un second temps on essaira d'organiser les
+            élèves en fonction de la moyenne la plus élevé et enfin on essaira d'affiche en console le top 3 des élèves.
+        */
+        const students = [
+            {
+                name: 'John',
+                notes: [1, 20, 18, 19, 12]
+            },
+            {
+                name: 'Jane',
+                notes: [15, 10, 13, 12, 9]
+            },
+            {
+                name: 'Adam',
+                notes: [3, 2, 16, 19, 10]
+            },
+            {
+                name: 'Nour',
+                notes: [4, 13, 15, 10, 8]
+            },
+            {
+                name: 'Fane',
+                notes: [14, 20, 15, 16, 19]
+            }
+        ]
+
+        // D'abord on vas calculer la somme des notes
+        const moyenne = (notes) => {
+            let sum = 0
+            for (let note of notes) {
+                sum = sum + note
+            }
+            return sum / notes.length // notes.length signifie le nombre de note qu'il y'a
+        }
+
+        const compareStudent = (a, b) => {
+            return b.moyenne - a.moyenne
+        }
+
+        for (let student of students) {
+            student.moyenne = moyenne(student.notes)
+            student.worst = Math.min(...student.notes)
+            student.best = Math.max(...student.notes)
+        }
+        students.sort(compareStudent)
+        console.log(students)
+
+        // Affichons maintenant le top 3 des étudiants
+        console.log(`Top 3 des étudiants
+            1: ${students[0].name} avec une moyenne de ${students[0].moyenne}, meilleur note (${students[0].best}), pire note (${students[0].work})
+            2: ${students[1].name} avec une moyenne de ${students[1].moyenne}, meilleur note (${students[1].best}), pire note (${students[1].work})
+            3: ${students[2].name} avec une moyenne de ${students[2].moyenne}, meilleur note (${students[2].best}), pire note (${students[2].work})
+        `)
+        /* Ou aussi
+            const formatStudent = (student) => {
+                return `${student.name} avec une moyenne de ${student.moyenne`
+            }
+
+            console.log(`Top 3 des étudiants
+            1: ${formatStudent(students[0])}
+            2: ${formatStudent(students[1])}
+            3: ${formatStudent(students[2])}
+            `)
+        */
+
+        // Calculer la fréquence de mot dans une chaîne de caractère
+        const phrase = `Vous savez, moi je ne crois pas que moi dans la chambre, vous me voyer bien moi je suis bien: savez pas`
+        const frequences = {}
+
+        // const ignored = [',', ':', ';'] -- On peut ignorer les mots d'une autre manière
+        // let cleanPhrase = phrase.toLowerCase()
+        // for(let character of ignored) {
+        //    cleanPhrase = cleanPhrase.replaceAll(character, '')
+        // }
+        // const wordss = cleanPhrase.split(' ')
+
+        const wordss = phrase
+            .toLowerCase()
+            .replaceAll(',', '') // replace : Permet de remplacer mais s'arrête qu'une seule fois
+            .replaceAll(':', '')
+            .split(' ')
+        for(let word of wordss) {
+            if(word !== '') { // && word.length >= 3 : Si on veut les mots qui ont une taille suppérieur à 3
+                if(frequences[word]) {
+                    frequences[word]++
+                } else {
+                    frequences[word] = 1
+                }
+            }
+        }
+
+        const frequencesArray = []
+        for(let k in frequences) {
+            frequencesArray.push({
+                word: k,
+                count: frequences[k]
+            })
+        }
+        frequencesArray.sort((a, b) => b.count - a.count) // sort : Prend en paramètre une fonction de comparaison
+        console.log(`Les mots les plus fréquents sont "${frequencesArray[0].word}" (${frequencesArray[0].count}), "${frequencesArray[1].word}" (${frequencesArray[1].count}), "${frequencesArray[2].word}", (${frequencesArray[2].count})`)
+    </script>
+
+</body>
+</html>

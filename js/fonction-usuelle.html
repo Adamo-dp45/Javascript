@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonction Usuelle</title>
+</head>
+<body>
+
+    <script>
+        // FONCTIONS SUR LES TABLEAUX
+        const notes = [12, 10, 20]
+        console.log(notes.at(-1)) // Aller dans le sens inverse, il commence par 20 Ou ..
+        console.log(notes[notes.length - 1]) // Me donne la dernière valeur
+
+        const tab1 = ['a', 'b', 'c']
+        const tab2 = ['d', 'e', 'f']
+        const tab3 = tab1.concat(tab2) // Permet de concatenez des tableaux, va fusionner les tableaux
+        console.log(tab3)
+
+        const person = [
+            {nom: 'Bak', prenom: 'Adam'},
+            {nom: 'Bak', prenom: 'sadia'},
+            {nom: 'Bak', prenom: 'mariam'},
+            {nom: 'Bak', prenom: 'Abdoul'}
+        ]
+        console.log(
+            person
+                .map((p, index, tableau) => p.nom + ' ' + p.prenom) // map : Convertir un tableau dans un autre tableau avec des valeurs différentes mais qui aura la même taille - Ne saute pas les éléments undefined, contrairement à forEach
+                .join('\n')
+
+            // 'p' : Valeur actuelle, 'index' : Position de l’élément, 'tableau' : Le tableau original
+        )
+
+        const filterNotes = [11, 20, 30, 9, 7]
+        const goodNotes = filterNotes.filter((note, index, tableau) => note >= 10) // Filtrer les éléments d'un en fonction d'un filtre de condition, ici on aura les notes supperieur a 10
+        console.log(goodNotes)
+
+        const array1 = [11, 20, 30, 9, 7]
+        const found = array1.find(element => element > 10) // findIndex Nous renvoi son index, findLast et findLastIndex(pour l'index) Renvoi le dernière élément
+        console.log(found) // Selectionne le premier element qui correspond à notre condition
+        console.log(array1.indexOf(20)) // On lui envoie la valeur et il nous renvoie son index
+
+        const array2 = [11, 20, 30, 9, 7]
+        array2.forEach((note, index) => { // Permet de parcourir un tableau, reçoit à la fois l'element et son index
+            console.log(note, index)
+        })
+
+        console.log(Array.from('foo')) // Créer un tableau à partir de différente chose ['f', 'o', 'o']
+        console.log(Array.from([1, 2], x => x + x)) // [2, 4]
+
+        const inc = [1, 2, 3]
+        console.log(inc.includes(2)) // Vérifie si une valeur est inclut dans un tableau et retourne un bool
+        // Ex: if(['b', 'c', 'a'].includes('a'))
+
+        const joindre = ['Je', 'appelle', 'adam']
+        console.log(joindre.join('-')) // Join des éléments avec une valeur entre 
+
+        const mapper = [11, 20, 30, 9, 7]
+        const map1 = mapper.map(x => x * 2) // Va multiplié chaque valeur par 2
+        console.log(map1) // Applique une fonction pour transformer notre tableau
+
+        const animals = ['chat', 'chien']
+        animals.push('cheval') // Permet de rajouter un nouvel élément a notre tableau original et la modifie après cout
+        animals.unshift('cheval') // Rajoute un nouvel élément au debut de notre tableau original
+        console.log(animals)
+
+        const reduce = [11, 11, 11]
+        console.log(reduce.reduce((acc, note, index, tableau) => acc + note, 0)) // Permettra de faire la somme des valeurs du tableau, prend en params l'accumulateur ici 0 et la valeur de départ, 0 est la valeur de départ, on aura 33, reduce : Permet de réduire les différentes valeurs et d'obtenir qu'une valeur en sortie
+        // reduce.reduceRight() -- Fais la même chose mais prend les éléments de droit à gauche
+
+        const reduceL = reduce.shift() // Retire le premier élément d'un tableau et modifie l'original
+        const reduceF = reduce.pop() // Retire le dernier élément d'un tableau et modifie l'original
+        const reduceU = reduce.unshift(15, 10) // Pousse des éléments dans un tableau mais au début
+
+        const ani = ['chat', 'chien', 'ourse']
+        console.log(ani.slice(1)) // Permet de recupérer une partie du tableau, ici il commence par l'index 1 et donne les elements en dessous
+        console.log(ani.slice(1, 2)) // Commence par 1 et termine par 2
+        console.log(ani.slice(1, -1)) // Par 2 et termine par 1
+        console.log(ani.slice().reverse()) // Slice simple permet de créer un nouveau tableau ensuite on peut y faire des traitement
+
+
+        // FONCTIONS SUR LES OBJETS
+        const obj = {
+            moi: 11,
+            toi: 10
+        }
+        Object.freeze(obj) // Permet de geler l'objet, il ne peut plus être utiliser
+        Object.keys(obj) // Nous donne toutes les clés de notre objet
+        Object.values(obj) // Nous donne toutes les valeurs de notre objet
+
+        const persons = {firstname: "John", lastname: "Doe"}
+        Object.entries(persons) // Va nous donner la valeur sous forme de tableau - 0 : ['firstname': 'John'] - 1 : ['latname': 'Doe']
+        Object.freeze(persons) // Permet de geler un objet, elle ne peut plus être modifier
+        Object.is(NaN, NaN) // Un peu comme un === mais avec des conditions spécifiques
+
+        function hello() {
+            console.log(this)
+        }
+
+        const hello2 = hello.bind(3) // Quand hello sera appelé this aura la valeur 3, une méthode qui a été bindé a une valeur de this qui a été définie et cette valeur ne change pas même après un .call(4) ou même on rebind .bind(4)
+        hello.apply(null, [10, 20]) // apply : Appel une méthode en lui passant la valeur de this et un tableau qui correspondra au différents arguments
+        hello.call(null, name, price) // call : && mais on lui passe les arguments les uns derrière les autres
+
+        // .bind : Sert à lier une fonction à un contexte this spécifique, Permet de définir ce que this va représenter quand la fonction sera appelée
+    </script>
+
+</body>
+</html>

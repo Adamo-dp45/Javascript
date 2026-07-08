@@ -1,0 +1,89 @@
+body, html {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+    background: #f7fafb;
+}
+
+.menu {
+    position: relative;
+    background-color: #FFF;
+    box-shadow:
+            0px 0.3px 0.6px rgba(0, 0, 0, 0.028),
+            0px 0.8px 1.8px rgba(0, 0, 0, 0.04),
+            0px 1.8px 4.2px rgba(0, 0, 0, 0.052),
+            0px 6px 14px rgba(0, 0, 0, 0.08)
+    ;
+    display: flex;
+}
+
+/* --- Responsive --- */
+.menu a {
+    position: relative;
+    padding: 1em;
+    text-decoration: none;
+    color: rgb(71, 85, 105);
+    transition: .3s;
+}
+
+/*
+.menu a {
+    padding: 1em;
+    text-decoration: none;
+    color: rgb(71, 85, 105);
+    transition: .3s;
+}
+*/
+
+.menu a:last-child {
+    margin-left: auto;
+}
+
+.menu a[aria-selected] {
+    color: #5396EB;
+}
+
+/* --- Responsive --- */
+.indicator {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    height: 4px;
+    background-color: #5396EB;
+    border-radius: 4px;
+    transform-origin: 0 0;
+    opacity: 0;
+}
+
+[aria-selected] .indicator {
+    opacity: 1;
+}
+
+/*
+.indicator {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    height: 4px;
+    width: 100px;
+    background-color: #5396EB;
+    border-radius: 4px;
+    transform-origin: 0 0;
+}
+*/
+
+/* --- Responsive --- */
+@media screen and (max-width: 500px) {
+    .menu {
+        flex-direction: column;
+    }
+
+    .indicator {
+        top: 0;
+        right: auto;
+        width: 4px;
+        height: auto;
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Element</title>
+    <script src="../src/js/custom-element.js" type="module" defer></script>
+</head>
+<style>
+    :root {
+        --bg: red; /* Ici il ne l'emporte pas car le ':host' est plus précis */
+    }
+
+    my-button {
+        --bg: red;
+    }
+
+    .badge {
+        padding: 4px;
+        color: #FFF;
+        border-radius: 4px;
+    }
+
+    .badge-secondary {
+        background-color: brown;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 3px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .tmp {
+        background-color: violet;
+        padding: 15px;
+        border-radius: 5px;
+        color: #FFF;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+        transition: .3s;
+        cursor: pointer;
+    }
+
+    .tmp:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+</style>
+<body>
+
+    <template id="tmp">
+        <button class="tmp">Templates</button>
+    </template>
+
+    <div> <!-- Quand on le met dans <p>, il n'accepte pas le slot -->
+        <!-- <my-button></my-button> -->
+        <my-button>
+            <div slot="inbutton">Mon Bouton</div>
+            <div slot="outbutton">
+                <second-timer prefix="Compteur"></second-timer>
+            </div>
+        </my-button>
+    </div>
+    <second-timer prefix="Compteur"></second-timer>
+
+    <div class="form-group">
+        <label for="start">Date debut</label>
+        <input type="text" id="start" class="form-control" is="date-picker">
+    </div>
+
+    <button id="add">Bouton</button>
+
+    <!--
+        Les Web Components sont un ensemble de technologies standardisées qui permettent de créer des composants HTML réutilisables, modulaires et encapsulés. Ils s'intègrent parfaitement aux pages web ou aux applications
+    -->
+</body>
+</html>

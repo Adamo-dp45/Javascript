@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate</title>
+    <link rel="stylesheet" href="../src/css/animate.css">
+    <script src="../src/js/animate.js" defer></script>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="reveal-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis delectus assumenda commodi fugit! Deserunt et, odit hic labore commodi expedita reprehenderit dolore earum eius iure, quo ducimus consequatur dolorem debitis.</div>
+        <div class="reveal-3">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate maxime eum nihil illum saepe natus animi magni nulla quibusdam, aperiam numquam soluta. Quaerat perferendis dolore veniam animi corrupti blanditiis quia.
+            Perferendis voluptas, quidem reiciendis odit officiis hic laborum? Consectetur laborum quae ipsa dolorem assumenda explicabo rerum optio voluptatum sit. Vel quae nobis delectus modi quos doloribus, nam quaerat aut laboriosam!
+        </div>
+        <div class="reveal-4">
+            Pariatur quas impedit deserunt dolor assumenda? Totam modi harum recusandae nobis porro eum quidem aperiam incidunt, consequatur rerum ad ab molestias dolores pariatur ipsam voluptas, unde veritatis distinctio. Nemo, vero.
+            Eligendi suscipit quos, assumenda amet voluptatem accusantium inventore laboriosam nesciunt repudiandae harum sed saepe, quae, doloribus iusto. Illum harum voluptatibus eaque vero voluptate eum impedit, rerum rem autem consectetur vel!
+        </div>
+    </div>
+
+    <button>Animate</button>
+    <button class="toggle">Dark-mode</button>
+
+    <!--
+        On peut vérifier les performances dans la partie 'Timeline' de notre inspecteur
+        -/ Animation fluide :
+            - Au lieu d'utiliser des méthodes comme setInterval ou setTimeout, qui ne tiennent pas compte du taux de rafraîchissement de l'écran, requestAnimationFrame garantit une animation fluide
+            - Elle permet au navigateur de gérer l'optimisation de l'animation, par exemple en ajustant le nombre d'images en fonction des performances
+            - Les animations s'arrêtent automatiquement lorsque l'onglet est inactif ou en arrière-plan, économisant ainsi les ressources du processeur
+    -->
+    <div class="request"></div>
+
+    <div style="height: 50vh"></div>
+    <div class="content">
+        <p data-reveal="left">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, natus non voluptatem consectetur modi nihil unde minima deserunt atque. Perspiciatis suscipit non vitae eveniet! Deserunt ea eveniet facilis. Tempora, delectus?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus deserunt necessitatibus incidunt consequuntur quae, quasi veritatis corrupti mollitia aperiam fugiat vero eveniet exercitationem assumenda. Doloremque eum necessitatibus deleniti eaque earum!
+        </p>
+
+        <p data-reveal="right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ex ullam perferendis ratione nam ad doloremque aut eos excepturi quam modi, officiis incidunt! Facilis laborum fuga ducimus non ad cum!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque iste dicta amet beatae nisi, laborum sint aliquid perspiciatis enim aspernatur officia id, harum perferendis, tenetur eum! Dolores asperiores laudantium voluptatem!
+        </p>
+
+        <p data-reveal="right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ex ullam perferendis ratione nam ad doloremque aut eos excepturi quam modi, officiis incidunt! Facilis laborum fuga ducimus non ad cum!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque iste dicta amet beatae nisi, laborum sint aliquid perspiciatis enim aspernatur officia id, harum perferendis, tenetur eum! Dolores asperiores laudantium voluptatem!
+        </p>
+
+        <p data-reveal="left">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, natus non voluptatem consectetur modi nihil unde minima deserunt atque. Perspiciatis suscipit non vitae eveniet! Deserunt ea eveniet facilis. Tempora, delectus?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus deserunt necessitatibus incidunt consequuntur quae, quasi veritatis corrupti mollitia aperiam fugiat vero eveniet exercitationem assumenda. Doloremque eum necessitatibus deleniti eaque earum!
+        </p>
+    </div>
+</body>
+</html>

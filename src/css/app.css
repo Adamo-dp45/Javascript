@@ -1,0 +1,157 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~easymde/dist/easymde.min.css";
+
+@import "./swupp.css";
+@import "./menu.css";
+@import "./modules/alert.css";
+@import "./modules/modal.css";
+@import "./modules/scrolltop.css";
+@import "./modules/tabs.css";
+@import "./modules/toast.css";
+
+body {
+    box-sizing: border-box;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* ----- */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: transform .3s ease;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 10;
+}
+/* ----- */
+.m-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #FFF;
+    padding: 15px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    transition: 2s ease-in-out;
+    position: relative;
+}
+
+.m-alert.success {
+    background-color: #41cf7c;
+}
+
+.m-alert.danger {
+    background-color: #f25353;
+}
+
+.m-alert.warning {
+    background-color: #feb32b;
+}
+
+.m-alert.normal {
+    background-color: #333;
+}
+
+.m-alert-close {
+    background: none;
+    border: none;
+    color: #FFF;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.m-alert-close:hover {
+    opacity: .5;
+}
+/* ----- */
+.window {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 400px;
+    height: 300px;
+    background: white;
+    border: 1px solid #aaa;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.title-bar {
+    background: #007acc;
+    color: white;
+    padding: 10px;
+    cursor: move;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.content {
+    padding: 15px;
+}
+/* ----- */
+.cursor-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #FFF;
+}
+
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid hsla(0, 0%, 100%, 0.5);
+}
+
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+/* ----- */
+#grid {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#grid.list-view {
+    flex-direction: column;
+}
+
+#grid.grid-view {
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.item {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    flex: 1;
+}
+
+#grid.grid-view .item {
+    width: calc(33.333% - 10px);
+    box-sizing: border-box;
+}
